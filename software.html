@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+       <meta charset="utf-8"/>
+      <!-- Always force latest IE rendering engine & Chrome Frame -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+      <meta http-equiv="cleartype" content="on"/>
+
+<title>Software Development in this Course</title>
+ <!-- Responsive and mobile friendly stuff -->
+    <!-- Stylesheets -->
+         <link rel="stylesheet" type="text/css" href="css/html5reset.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/col.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/8cols.css" media="all">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+</head>
+
+<body>
+  <div id="container">
+
+   <div class="section group">
+      <div class="coursename span_8_of_8">
+        <a  href="index.html">CISC 3115</a>
+      </div>
+    </div>
+
+
+<h2>Software Development in this Course</h2>
+
+<p> One of the goals of this class is to provide you with some experience developing software in a Unix-like environment. I invite you to experiment with the possibilities. Because access tp Unix/Linux on campus is limited &mdash; and because Java is itself platform-independent &mdash; I will not <em>require</em> you to use Unix/Linux, but I will give you several avenues for exploration. In class, my lectures/demonstrations will use <a href="https://en.wikipedia.org/wiki/MacOS">MacOS</a> (which is the broad Unix family), relying mainly on the <a href="https://en.wikipedia.org/wiki/Command-line_interface">Terminal/command-line</a> and the <a href="https://en.wikipedia.org/wiki/Vim_(text_editor)">vim</a> editor (which dates back to 1976 but remains a remarkably popular development environment). This is the only development environment in which I guarantee I will be able to help you with technical problems.</p>
+
+  <h3>Accessing and Using vim</h3>
+   <p>There are essentially three ways to get access to vim:</p>
+  <ol>
+    <li>It is part of the base system on almost all Unix/Linux systems, including MacOS. You can run it by typing <code>
+      vi
+      </code> or <code>
+        vim
+      </code> at the command prompt. If you have a machine running MacOS or GNU/Linux, you already have vim.    </li>
+    <li>If you have a machine running Windows, you can download and install vim from <a href="https://www.vim.org/download.php#pc">https://www.vim.org/download.php#pc</a>. Be sure you download a version that is appropriate for your particular machine!
+    </li>
+    <li>You may also prefer to work on the machines in the ITS Linux Lab. You can do that (and use vim) either by visiting the lab in person or by connecting over the internet. More information about those options is available  <a href="../linuxlab.html">here</a>.</li>
+  </ol>
+
+   <p>
+     vim is quite different from other editing tools you may have used: that's mainly because it is organized on the idea that the main thing programmers do is <em>change</em> existing text rather than <em>enter</em> new text. <a href="https://www.youtube.com/watch?v=wlR5gYd6um0">this 36-minute video</a> is a nice introduction to this way of thinking (even if you don't watch the whole thing). <a href="https://medium.com/actualize-network/how-to-learn-vim-a-four-week-plan-cd8b376a9b85">Here</a> is a guide for learning how to be an effective vim user (it also links to the video, at the end). In particular, the recommendation about spending some time with the <code>vimtutor</code> application is a good one. If you prefer a book-like introduction, <a href="https://vim.swaroopch.com/">A Byte of Vim</a> is well-done (and free).</p>
+
+   <p>Once you have a basic idea of how vim works, this <a href="http://vimdoc.sourceforge.net/htmldoc/quickref.html#quickref">quick reference</a> (from the official documentation) is a condensed listing of the many things you can do; <a href="https://vim.rtorr.com/">here</a> is another, more mobile-friendly cheat sheet.
+   </p>
+
+
+  <h3>Developing with Java</h3>
+
+   <p>If you've already taken a course in Java (which is a prerequisite for this course), you should be familiar with the Java Development Kit (JDK); if you have access to a computer, you probably have already installed a JDK on it. In order to make sure we're all using the same version of the language, please go to <a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">this page</a> to install the latest version of Java SE 11.
+
+   <p>For this class, we will mainly be using three Java-related commands: <code>javac</code> to compile Java programs, <code>java</code> to run programs, and, perhaps, <code>jdb</code> to debug programs. If you are using a GUI-based Java IDE like DrJava, that's fine, but please note I will not be able to help you with anything related to those tools.</p>
+
+
+  <h3>Other ways to use Linux</h3>
+
+  If you have access to a computer, you can fairly easily use Linux on it. If you want to explore this, you have about three choices:
+  <ol>
+    <li>Install GNU/Linux on it directly. This will wipe out whatever was there before, so this only works if you want to dedicate the machine solely to GNU/Linux</li>
+    <li>Set up your machine as a "dual boot" system, allowing you to start in either GNU/Linux or (say) Windows. This is a slightly risky operation, so be careful! <a href="https://opensource.com/article/18/5/dual-boot-linux">Here</a> is one guide to setting up dual-boot on a Windows machine; <a href="https://medium.com/@genebean/dual-booting-macos-high-sierra-and-linux-mint-4bbc21b830ef">here</a>'s one for Mac. </li>
+    <li>Run Linux as a "virtual machine" that is "hosted" by your current operating system. This is fairly easy to set up, with little risk, but the "hosted" machine will not run quite as quickly. The power of your computer's hardware will also have a big impact on how well Linux runs. <a href="https://www.youtube.com/watch?v=sNixOS6mHlU">Here</a> is a video on setting this up on a Mac; <a href="https://www.youtube.com/watch?v=vBSSGmZU7BC">here</a>'s one for Windows. </li>
+  </ol>
+
+
+
+        <hr />
+    </div>
+</body>
+</html>

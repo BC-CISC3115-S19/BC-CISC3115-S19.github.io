@@ -1,0 +1,83 @@
+ <!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+       <meta charset="utf-8"/>
+      <!-- Always force latest IE rendering engine & Chrome Frame -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+      <meta http-equiv="cleartype" content="on"/>
+
+<title>Accessing the College's Linux Lab</title>
+ <!-- Responsive and mobile friendly stuff -->
+    <!-- Stylesheets -->
+         <link rel="stylesheet" type="text/css" href="css/html5reset.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/col.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/8cols.css" media="all">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
+
+  <body>
+
+   <div class="section group">
+      <div class="coursename span_8_of_8">
+        <a  href="index.html">CISC 3115</a>
+      </div>
+    </div>
+      <h2>Accessing the College's Linux Lab</h2>
+
+      <p>It's always good to have access to a Linux system; fortunately the College has a Linux lab with a few dozen machines running Linux. To access these, you first need to go to the W.E.B. and ask for your Linux account information (everyone registered for this class has one). From there, you may either go directly to the Linux lab room (130), or you may connect to those machines via the Internet (you'll get a sheet with this information).</p>
+
+      <p> You will need  <code>ssh</code> (secure shell) to connect to the ITS computers.  ssh comes
+        with Linux, Unix or the Mac operating system, but if you use Windows, you will need to install
+        MS windows OS you will need to install some software.
+
+      </p>
+      <h3>For Windows</h3>
+     There are several possibilites;
+      <ul>
+        <li><a href="http://sourceforge.net/projects/sshwindows/files/OpenSSH%20for%20Windows%20-%20Release//">Open SSh for Windows</a></li>
+
+        <li><a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">putty and psftp download</a></li>
+
+        <li><a href="http://www.bitvise.com/download-area">Bitvise Tunnelier or WinSSHD</a></li>
+      </ul>
+      <p>
+       Try one, or all. (putty and BitVise have GUI interfaces)</p>
+
+      <h3>Using ssh</h3>
+
+     <p>On Mac and Linux machines, or using the Windows command prompt, connec to a Linux machine with a command like</p>
+
+      <p><code>ssh &lt;username&gt;@&lt;address&gt;</code></p>
+
+      <p>where  &lt;username&gt; is the username you are given at the W.E.B., and &lt;address&gt is one of the IP addresses listed below</p>
+
+      <h3>Accessible lab machines</h3>
+
+      <p>While there are quite a few machines in the lab, only a small handful can be accessed directly from off campus. Their IP adddresses are:</p>
+
+      <pre>
+        146.245.252.150
+        146.245.252.151
+        146.245.252.31
+        146.245.252.34
+        146.245.252.35
+        146.245.252.41</pre>
+
+      <h3>Working over an ssh connection</h3>
+      <p>This is very important: over ssh, you will not be able to access the full graphical user interface you could use if you were "in person." You are limited to using the terminal. This is a situation that may arise often in your career; this is a large part of why I'm encouraging you to use and learn vim in this class: it's designed to use without a GUI and without a mouse, so it works perfectly in this kind of situation.</p>
+
+          </hr>
+
+
+        <hr />
+      </div>
+    </body>
+  </html>
