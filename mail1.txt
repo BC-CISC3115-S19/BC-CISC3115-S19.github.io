@@ -11,11 +11,11 @@ Please take note of a few specific things:
 
 (The calendar is obviously going to be updated regularly! I will email you to let you know of major changes, but you should check every couple days.)
 
-3. Be sure you have the book! You should be able to find very cheap electronic editions of the book, and inexpensive hardcopies.
+3. Be sure you have the book! You should be able to find very cheap electronic editions of the book, and inexpensive hardcopies. But please be sure to get the SECOND edition.
 
 4. Please fill out the short survey you'll find linked in the calendar under "Class 1." This mostly is about making sure we can communicate during the semester.
 
-5. Finally, I will be encouraging you to use the vim editor for this class. Under "Class 2" you'll find a link to a discussion of how we'll be approaching software development in this class. If you're able to bring a laptop to class, please do; we'll make much use of it. If you can't bring a laptop, don't worry about it!
+5. Finally, if you're able, please bring a laptop to class. Under "Class 2" you'll find a link to a discussion of how we'll be approaching software development in this class, including the software I recommend you install.  If you can't bring a laptop, don't worry about it!
 
 Until we meet,
 Scott Dexter
