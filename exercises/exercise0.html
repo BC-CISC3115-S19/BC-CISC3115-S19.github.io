@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+      <!-- Always force latest IE rendering engine & Chrome Frame -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+      <meta http-equiv="cleartype" content="on"/>
+
+<title>Exercise 0: java and vim</title>
+
+    <!-- Responsive and mobile friendly stuff -->
+    <!-- Stylesheets -->
+         <link rel="stylesheet" type="text/css" href="css/html5reset.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/col.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/8cols.css" media="all">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+</head>
+
+<body>
+  <div class="section group">
+    <div class="coursename span_8_of_8">
+      <a href="../index.html">CISC 3115</a>
+    </div>
+  </div>
+
+  <h2>Exercise 0: java and vim</h2>
+
+  <h3>Objectives:</h3>
+
+  <ul>
+    <li>Review essentials of Java programming</li>
+    <li>Get acquainted with reading the official Java API documentation</li>
+    <li>Get acquainted with fundamentals of using vim and command-line Java</li>
+  </ul>
+
+
+  <h3>The Exercise</h3>
+
+
+  <p>
+    In your introduction to Java, you probably used the <code>Scanner</code> class to facilitate reading keyboard input. You may have used such <code>Scanner</code> methods as <code>readLine()</code> and <code>readInt()</code>. In this exercise, we'll use this class to do a <strong>slightly</strong> sophisticated version of a simple task.</p>
+
+  <p>Here's the task: read in two
+    numbers, then compute and print their sum. A run of your
+    program would look something like this
+    (user's text in <font color="red">red</font>):</p>
+
+  <pre>
+    Enter two numbers: <font color="red">4 5</font>
+    The sum of 4 and 5 is 9. </pre>
+
+  <p>
+    However, there is one
+    small twist: your program should let the user <em>silently</em> decide whether to enter
+    numbers as integers or floating-point numbers (or, in Java terms, as
+    <code>int</code>
+    or as
+    <code>double</code>
+    ). And then your program should calculate and display the sum depending on the type of the user's input. So your program should <strong>also</strong> run like this:
+  </p>
+
+  <pre>
+    Enter two numbers: <font color="red">4.2 5.45</font>
+    The sum of 4.2 and 5.45 is 9.65.  </pre>
+
+  <p>Of course, your program should be able to deal with "mixed types":</p>
+
+  <pre>
+    Enter two numbers: <font color="red">5 17.3</font>
+    The sum of 5 and 17.3 is 22.3. </pre>
+
+  <p>So the <em>type of the output</em> matches the <em>type of the input</em>&mdash;if both input values can be treated as <code>int</code>, then the output is an <code>int</code>; otherwise the output is a <code>double</code>.</p>
+
+
+
+    Note that you should <em>not</em> ask the user what type
+    they're going to use&mdash; your input/output should be as
+    simple as the sample runs above. You should also deal gracefully (no weird error
+    messages!) with the situation in which the user's input is
+    not numerical at all. Finally, you should <em>not</em> do any complicated analysis (like looking for decimal points, etc.) of the user's input to figure out what to do.</p>
+  <p>
+
+
+  <p>The <code>Scanner</code> class contains all the methods you need to do this easily. To learn more about how it works, visit the <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Scanner.html"> official API documentation</a>. Note! A lot of this documentation is written for very experienced Java programmers (I don't fully understand all of it). This is something you should get used to: getting useful information out of documentation that you don't fully understand. See what you can get out of the introductory description of the class (there are some valuable hints in the example code, which uses methods <code>nextInt()</code>, <code>hasNextLong()</code>, and <code>nextLong()</code>&mdash;make sure you understand what these methods do), then scroll down and see else is provided in the documentation. See if you can find documentation for the methods you know about&mdash;is there anything there that's new to you? Are there other <code>Scanner</code> methods that might help with your task?
+  </p>
+
+
+  <p>I strongly encourage you to work with vim for this exercise. In addition to getting familiar with basic editing actions (and remember, <a href="software.html">this page</a> has stuff about vim), you should also experiment with some of the "advanced" features described <a href="https://medium.freecodecamp.org/learn-linux-vim-basic-features-19134461ab85">in this article</a>.
+  </p>
+
+<p>Similarly, you should get used to working with Java from the command line. <a href="https://introcs.cs.princeton.edu/java/15inout/msdos.html">Here</a> is a short tutorial on using Java on the Windows command line; if you're using a Mac, watch this <a href="https://www.youtube.com/watch?v=XuzWpPg_png">short video</a> instead.</p>
+
+ <hr/>
+</body>
+</html>

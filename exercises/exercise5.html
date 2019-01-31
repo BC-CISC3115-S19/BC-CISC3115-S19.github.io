@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+      <!-- Always force latest IE rendering engine & Chrome Frame -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+      <meta http-equiv="cleartype" content="on"/>
+
+<title>Exercise 5: Fixing the Jukebox</title>
+
+    <!-- Responsive and mobile friendly stuff -->
+    <!-- Stylesheets -->
+         <link rel="stylesheet" type="text/css" href="css/html5reset.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/col.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/8cols.css" media="all">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+</head>
+
+<body>
+  <div class="section group">
+    <div class="coursename span_8_of_8">
+      <a href="../index.html">CISC 3115</a>
+    </div>
+  </div>
+
+  <h2>Exercise 5: Fixing the Jukebox</h2>
+
+  <h3>Objectives:</h3>
+
+  <ul>
+    <li>Implement viable <code>equals()</code> and <code>hashCode()</code>
+    <li>Apply the <code>HashMap</code> collection.</li>
+  </ul>
+
+  <h3>Overview</h3>
+
+  <p>In this exercise, we're going to update the Jukebox application one more time. Instead of <em>ignoring</em> duplicates, now we want to <em>count</em> them.</p>
+
+  <h3>Tracking Unique Songs</h3>
+  <p>As we discussed at the end of class last week, song titles aren't enough to distinguish different songs&mdash;and if we want to count how many times a song is played, we certainly don't want to give credit to the wrong artists! So, fix the <code>Song</code> class so that two <code>Song</code> objects are only treated as equal if they have the same title <em>and</em> the same artist.</p>
+
+
+  <h3>Counting Songs</h3>
+  <p>Now, how exactly should we keep track of how many times each song is played? It's tempting to add a "countPlays" instance variable to the <code>Song</code> class, and maybe an "incrementCount()" method. But think about object-oriented design... should a song "know" how many times it's been played? That means it would also have to know (or be told) to reset that count periodically. I don't think that sounds like a great design&mdash;number-of-plays is not really an "essential quality" of a song. Alternatively, if you think about how the jukebox application works, each <code>Song</code> object really represents a single "play" of the song; if I have multiple objects representing multiple plays of the same song, which one should do the counting?</p>
+
+  <p>Instead, I think it's more a property of the <em>player</em>. So, let's make it the responsibility of the jukebox to count the songs it plays&mdash;resetting the count will be much easier than (say) going through all the songs and resetting their individual counts. Specifically, create a hashmap instance variable in the <code>Jukebox3</code>class:
+
+    <pre>
+HashMap&lt;Song, Integer&gt; songCount = new HashMap&lt;Song,Integer&gt;();</pre>
+
+    Write a method <code>countSongs()</code> that iterates through <code>songList</code> and uses <code>songCount</code> to map every song that’s been played to the count of how many times it’s been played. And add code to the <code>main()</code> method that uses <code>songCount</code> to display the number of times each song has been played.</p>
+
+  <p>Here is the book's original code: <a href="Jukebox3.java">Jukebox3.java</a>&nbsp;&nbsp;<a href="Song.java">Song.java</a></p>
+
+  <p>Of course, you'll have to generate your own input text file in order to test your code. Remember that this version of the <code>Song</code> class reads in 4 "tokens" per line, so be sure your input file format matches what the code expects.</p>
+
+  <p>If you have time, write code that allows us to compare songs by <em>both</em> title and artist (that is, so that songs with the same title can still be put in order by the artist name.)</p>
+
+
+</body>
+</html>

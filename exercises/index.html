@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>Project Zero</title>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro'
+    rel='stylesheet' type='text/css' />
+<link rel="stylesheet" type="text/css"
+    href="http://www.sci.brooklyn.cuny.edu/~sdexter/style.css" />
+</head>
+
+<body>
+    <div id="container">
+        <h1>Project Zero</h1>
+
+        <h2>Overview</h2>
+
+        <p>The main objective of this project is to allow you to
+            become familiar with the GitHub+Eclipse workflow you'll be
+            using on later projects. It will also give you a little bit
+            of practice writing code in Eclipse, and also get you
+		started reading the Java API.</p>
+
+	<p>To start, make sure you've joined your "team" on GitHub (if you didn't get an automatic email about this, try logging into github, then visiting https://github.com/BC-CISC3120-S17). Once you've joined the team, go to the team page, and you shoud see a repository with <code>project0</code> in
+	its name. Copy the URL of the repository,
+	then <strong>clone</strong> it into your Eclipse workspace:
+	this should basically create a new project with a very bare-bones <code>ProjectZero.java</code> file. Your task is to complete this program so that it runs in accordance with the specifications below. You should <strong>commit</strong> your code frequently, and <strong>push</strong> your commits at the end of each work session (if not more frequently).</p>
+
+        <h2>The Project</h2>
+
+
+        <p>
+            In the application activities, we've used 
+            <code>Scanner</code>
+            objects to read input from the keyboard. For this project,
+            we'll use <code>
+              Scanner
+            </code> to do an apparently simple thing: read in two
+            numbers, then compute and print their sum. A run of your
+            program would look something like this  (user's text in <font
+                color="red">red</font>):</p>
+
+<pre>
+Enter two numbers: <font color="red">4 5</font>
+The sum of 4 and 5 is 9.
+</pre>
+
+<p>           However, there is one
+            small twist: your program should let the user <em>silently</em> decide whether to enter
+            numbers as integers or floating-point numbers (eg as
+            <code>int</code>
+            or as
+            <code>double</code>
+            ). Calculate the sum depending on the type of the user's
+            entry. So your program should also run like this:
+        </p>
+        
+<pre>
+Enter two numbers: <font color="red">4.2 5.45</font>
+The sum of 4.2 and 5.45 is 9.65.
+</pre>
+
+<p>Of course, your program should be able to deal with "mixed types":</p>
+
+<pre>
+Enter two numbers: <font color="red">5 17.3</font>
+The sum of 5 and 17.3 is 22.3.
+</pre>
+
+        <p>
+            Note that you should <em>not</em> ask the user what type
+            they're going to use&mdash; your input/output should be as
+            simple as the sample runs above.</p>
+        <p>
+            You should also deal gracefully (no ugly error/exception 
+            messages!) with the situation in which the user's input is
+            not numerical. The <code>Scanner</code> class contains all the methods you need to do this easily.
+        </p>
+
+        <h2>Grading and Deadlines</h2>
+<p>	Normally, I grade projects based on documentation, style,
+        design, and correctness. (We'll talk more about this in class.)
+        This is just a "starter," so the main emphasis is getting <em>something</em>
+        done. Specifically:</p>
+
+        <p>I will grade out of 100 points, allocated as follows:</p>
+
+        <ol>
+            
+                <p>
+                    <li><b>50% Completion</b> Even if you have
+                        trouble getting this to work, or generating all
+                        the documentation, push <em>something</em> up to
+                        GitHub before the project is due. If you have
+                        trouble doing this, let me know <strong>as
+                            soon as possible</strong>.
+                             </li>
+                </p>
+           
+            <p>
+                <li><b>25% Documentation</b>. Your project should include
+                three kinds of documentation, as described in the <a
+                    href="http://bc-cisc3120-f16.github.io/documentation.html">About
+                    Documentation</a> page. You should provide doccomments
+                for each class and method in your project, and generate
+                HTML documentation using javadoc. For this project, the
+                <code>README</code>
+                needs only to contain a "Works Cited" section: Any
+                website, book, or similar resource from which you get
+                useful guidance must be listed here, along with a brief
+                description of what you got from it (a bit of code? an
+                explanation? an answer to a question?). You do not need
+                to list the Java API or either of the two books
+                required/recommended for class. If you use no other
+                resources, then your "Works Cited" section must simply
+                contain the word <em>None</em>.</li>
+            </p>
+            
+            <p><li>
+                    <b>25% Correctness</b> Does your program work as it
+                    should?
+                </p></li>
+
+        </ol>
+
+ <p>
+            On this project, and probably all projects this semester,  you are to work strictly
+            <em>on your own</em>. Specifically, you may neither show
+            your code to, nor look at the code of, anyone else taking
+            3120 this semester. You may consult online/textbook
+            resources (subject to the "Documentation" requirements
+            above). You may certainly consult with me. You may, if you
+            like, discuss your design at a high level with other
+            students ("Oh, I found the
+            <code>java.foo.bar</code>
+            package to be really helpful," or, "Sure, I can explain the
+            geometry of a paint window to you.").</p>
+
+        <p>The project is due at 11:59pm on the day of Class 9. At that time, I will clone your github repository (specifically, the 
+<code>master</code> branch). Make sure all your code, documentation, etc., is current on github at that time.
+          </p>
+
+        <h3>A Note on Style</h3>
+
+        Usually, part of your grade depends on the <em>style</em> of
+        your code. Here's what I expect: Your code should be properly
+        formatted, with enough (but not too much) whitespace. Eclipse
+        will do most of this for you; make sure you let it help you.
+        Variable names, metohd names, etc, should all be
+        "self-documenting" but not excessively long (one-letter
+        variables names should <em>only</em> be used as loop counters).
+        <em>Generally</em>, you can use any style you like, as long as
+        you're consistent. If you're not sure what style to use, follow
+        the <a
+            href="https://github.com/twitter/commons/blob/master/src/java/com/twitter/common/styleguide.md">GitHub 
+            Style Guide</a>, except where Eclipse's automatic formatting
+        contradicts these guidelines.
+        </li>
+
+        <p>
+            You can earn up to 10 points extra credit by implementing
+            extra behaviors. Any extra behaviors you provide should be
+            listed briefly in the
+            <code>README.md</code>
+        </p>
+
+       
+    </div>
+</body>
+</html>

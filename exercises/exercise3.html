@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+      <!-- Always force latest IE rendering engine & Chrome Frame -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+      <meta http-equiv="cleartype" content="on"/>
+
+<title>Exercise 3: Fun with Geometric Objects</title>
+
+    <!-- Responsive and mobile friendly stuff -->
+    <!-- Stylesheets -->
+         <link rel="stylesheet" type="text/css" href="css/html5reset.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/col.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/8cols.css" media="all">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+</head>
+
+<body>
+  <div class="section group">
+    <div class="coursename span_8_of_8">
+      <a href="../index.html">CISC 3115</a>
+    </div>
+  </div>
+
+  <h2>Exercise 3: (More) Fun with Geometric Objects</h2>
+
+  <h3>Objectives:</h3>
+
+  <ul>
+    <li>Define and implement an interface.</li>
+    <li>Define classes with constructors.</li>
+    <li>Write code that takes advantage of polymorphism.</li>
+  </ul>
+
+  <h3>A Couple Interfaces</h3>
+
+  <p>We played with the idea of <code>GeometricObject</code> interface in the application activities. Let's write a complete application using this idea (we'll simplify the interfaces involved, a little). Start by defining two interfaces. <code>GeometricObject</code> has a <code>getArea()</code> and <code>getPerimeter()</code> method, both of which return <code>double</code> values. And <code>Resizable</code> has a <code>resize()</code> method that takes an <code>int</code> percentage. Remember, every class and interface should be in <em>separate</em> files.</p>
+
+  <h3>A Few Classes</h3>
+
+  <p>Let's whip up some geometric objects. Write a <code>Circle</code> and <code>Square</code> class, each of which implement <code>GeometricObject</code>. Note you'll need to use <code>protected</code> instance variables. Write appropriate constructors for these classes. By the way, &#960; in Java is <code>Math.PI</code>&mdash;no <code>import</code> statement necessary. </p>
+
+  <p>Then write subclasses <code>ResizableCircle</code> and <code>ResizableSquare</code> which implement the <code>Resizable</code> interface.</p>
+
+    <h3>A Main Program</h3>
+
+  <p>Write a main program that uses these classes. Make an <code> ArrayList</code> of <code>GeometricObject</code>s, fill it with some squares and circles, and then use enhanced <code>for</code> to print out the area and perimeter of all the shapes. Then make another  <code> ArrayList</code> of <code>Resizable</code>s, and fill it with some shapes. Print out the areas and perimeters, then loop through again, resizing to 50%, and print out the areas and perimeters again. Did the resizing have the correct effect?</p>
+
+
+    <h3>Bonus...</h3>
+
+  <p>If you get done with that quickly, think about incorporating two more shapes: <code>Ellipse</code> and <code>Rectangle</code>. Note that each of these require two dimensions. (You can find formulas for the ellipse <a href="https://en.wikipedia.org/wiki/Ellipse#Metric_properties">here</a> (heh heh). Where should these shapes go in the "inheritance tree"? Does adding them change anything about your previously-written code?</p>
+
+
+ <hr/>
+</body>
+</html>

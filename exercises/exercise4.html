@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+      <!-- Always force latest IE rendering engine & Chrome Frame -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+      <meta http-equiv="cleartype" content="on"/>
+
+<title>Exercise 4: Model-View-Controller</title>
+
+    <!-- Responsive and mobile friendly stuff -->
+    <!-- Stylesheets -->
+         <link rel="stylesheet" type="text/css" href="css/html5reset.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/col.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/8cols.css" media="all">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+</head>
+
+<body>
+  <div class="section group">
+    <div class="coursename span_8_of_8">
+      <a href="../index.html">CISC 3115</a>
+    </div>
+  </div>
+
+  <h2>Exercise 4: Model-View-Controller</h2>
+
+  <h3>Objectives:</h3>
+
+  <ul>
+    <li>Implement a Swing application</li>
+    <li>Understand the elements of the Model-View-Controller design
+      pattern</li>
+    <li>Be able to customize the behavior of some Swing components
+  </ul>
+
+  <h3>Overview</h3>
+
+  <p>In this exercise, you're not going to have to write much
+    code. The focus of the exercise is on getting into
+    the <em>relationship</em> among the objects/classes that make up
+    an application. Partly it's about more
+    reading-of-the-documentation, and partly it's about seeing how
+    object-oriented designs work in practice. There's a fair amount to
+    read and think about before you get to the point of writing
+    code&mdash;but that's usually how things go on a new project. Of
+    course, your endpoint for his exercise will be the starting point
+    for Project 2...</p>
+
+  <h3>MVC</h3>
+  <p>I talked for a few minutes in class about
+  Model-View-Controller. That was no accident. While there are many
+  design patterns floating around Java, MVC shows up a lot in
+  Swing. And beginning to think in terms of design patterns is an
+  important step in your development as a software developer. (For
+    example, there are
+  a <a href="https://www.google.com/search?q=software+design+pattern+design+patterns+books&sa=X">ton</a>
+  of books written about design patterns, many focusing on a
+    particular programming language.)</p>
+
+  <p>As we saw in the big-small-circle application, MVC is often used
+  to structure the user interface of an application; it's a useful way
+  make sure we're keeping the three kinds of behavior fairly separate
+  from each other (and therefore making sure that we're not
+  programming like that jerk Larry). But think about what we know
+    about (for example) the <code>JTextField</code> class. Which of
+  the following are responsibilities/behaviors of this class?
+<ol type="a">
+    <li> Store some text data
+    <li> Display some text data
+    <li> Respond to some keyboard entries
+  </ol></p>
+
+  <p>While you're thinking about that, look at the <code>JList</code>
+  discussion on p. 417 of the book. Which of these are
+    responsibilities of this class?
+
+    <ol type="a">
+      <li>Store a list of objects
+      <li>Remember which objects have been "selected"
+      <li>Display the values of the objects in the list
+      <li>Respond to mouse-clicks
+    </ol>
+
+    Actually, most of the Swing UI components have these
+    responsibilities: storing some data, presenting that data, and
+    allowing users to interact with that
+    data. (OK, a <code>JButton</code> doesn't have that much going
+    on&mdash;but that's one of the exceptions.) By the way, for those
+    two multiple choice questions, all of the listed items are
+    correct. (You can read more about Swing and
+    MVC <a href="https://www.oreilly.com/library/view/java-swing/156592455X/ch01s04.html">here</a>,
+    and more about the story for text components specifically
+    <a href="https://docs.oracle.com/javase/10/docs/api/javax/swing/text/JTextComponent.html">here</a>,
+    if you like.)</p>
+
+  <h3>Introducing the <code>Locale</code> class</h3>
+
+  <p>In Project 2, we'll use these ideas to assemble
+  a <em>slightly</em> complex Swing application. But for this
+    exercise, we'll focus on one non-Swing class (<code>Locale</code>)
+    and the <code>JList</code>
+  component. First, <a href="https://docs.oracle.com/javase/10/docs/api/java/util/Locale.html"><code>Locale</code></a>. As
+  the docs say, this is a class whose instances represent "a specific
+  geographical, political, or cultural region." This is obviously
+  something important to many applications&mdash;so much so that there
+  are several international standards that address how to represent
+  and identify locales; some of the behavior of this class is based on
+    those standards. So why do we care about locale? It might help us
+  if we want our application to be presented in the right language to
+  its user. But other things besides language depend on locale, like
+  how dates are formatted, how numbers are written, and specifically
+  how currencies are written. You can do all kinds of things with locales, but you might not be
+    surprised that some classes in the Java API are
+    "<code>Locale</code> sensitive." Among them
+    are <code>NumberFormat</code>, <code>Currency</code>,
+    and <code>DateFormat</code>. We'll deal more with those later...!</p>
+
+  <h3>Customizing a <code>JList</code></h3>
+  <p>But for now, let's work on making a list of <code>Locale</code>s
+  available to our users. Take a look
+    at <a href="LocaleList.java">this code</a>. It declares an array
+    of <code>Locale</code> objects, then creates
+  a <code>JList&lt;Locale&gt;</code> that holds those objects (note
+    the <code>JList</code> constructor that lets me create the list
+    from an array of objects). Notice, too: this is not
+    a <code>JList</code> of <code>String</code>s, and I haven't given
+    any instructions about how the <code>JList</code> is supposed to
+  display each of the locales in the list. What will happen? Make a
+  hypothesis, then run the
+  code and find out. Was your hypothesis correct? Why does the program
+    have this behavior?</p>
+
+<p>Maybe you don't think this behavior is the best; I certainly
+  don't. How can we address this? Well, remember that one of the
+  responsibilities of <code>JList</code> is to display its
+  contents. If we
+  consult <a href="https://docs.oracle.com/javase/10/docs/api/javax/swing/JList.html">the
+    documentation</a>, we learn (several paragraphs down) that
+  "Painting of cells in a <code>JList</code> is handled by a delegate
+  called a cell renderer." That is, every <code>JList</code> object
+  has an instance variable that refers to an object that implements
+  the <a href="https://docs.oracle.com/javase/10/docs/api/javax/swing/ListCellRenderer.html"><code>ListCellRenderer</code> interface</a>. And, importantly, we
+  can change the cell renderer we use by passing a reference (to the
+  cell renderer we want) to the <code>setCellRenderer()</code> method
+  of <code>JList</code>.</p>
+
+<p>So, if we want to customize how our list items are displayed, we
+  just need to write our own class implementing that interface. Note
+  that the interface only includes one
+  method, <code>getListCellRendererComponent()</code>, but it looks
+  like it has to do a lot of work. We don't want to do that much
+  work!&mdash;we just want to tweak the "default behavior" a little
+  bit. This sounds a little bit like the situation with
+  the <code>paintComponent()</code> method. The "default painting behavior" of
+  a <code>JPanel</code> is not helpful to us (it basically does
+  nothing), but the <code>paintComponent()</code> method does a lot of
+  work that we actually can't do ourselves. The solution there was to
+  start with the <code>JPanel</code> class and then override the
+  default behavior of <code>paintComponent()</code> with our own
+  behavior. This raises a question: is there a class out there that
+  does the "default cell renderer" behavior? If you look closely at
+  the <code>JList</code> documentation, you might find something that
+  says "See also: .... <code>DefaultListCellRenderer</code>." Hmmm
+  interesting! Look at <em>that</em> documentation: not only does it
+  implement the <code>ListCellRenderer</code> interface, but it
+  also <code>extends JLabel</code>! That is, by default,
+  a <code>JList</code> is displayed with a bunch
+  of <code>JLabel</code>s!</p>
+
+<p>But the real point is that we can change how cells are rendered
+  just by subclassing the default renderer. So, this is your first
+  task (after all this reading): <strong>modify
+    the <code>LocaleList</code> code to display
+    each <code>Locale</code> in a more user-friendly way</strong>. <p>
+
+  <p>A few notes about this, though:
+    <ul>
+      <li>You only want to write code that changes the behavior you
+      don't like. You want to keep all the rest of the behavior of the
+      default renderer (even though we don't know exactly what that
+        behavior is). That is, you want your overridden
+       <code>getListCellRendererComponent()</code> method to the
+        "default" behavior from the superclass <strong>first</strong>,
+        then make your modifications.</li>
+      <li>Look at the method parameters&mdash;some of them aren't
+        relevant to this task, but maybe some of them are!</li>
+      <li>Remember that the class you're writing
+      IS-A <code>JLabel</code>, so you have all those methods
+        available to you.</li>
+      <li>You might want to look at the <code>Locale</code>
+      documentation to see if there's anything that can help you get a
+        better-looking description.
+        <li>Yes, this is a job for an inner class! Like the other
+        inner classes we've written so far, the amount of code we
+        actually need to write is quite small&mdash;you shouldn't need
+        to write more than about 4 lines of "method body" code.
+    </ul>
+
+    <h3>Another <code>JList</code> customization</h3>
+
+  <p>OK, let's do something crazy... let's let <em>the user</em> add
+    locales to this list. According to the <code>Locale</code> API,
+    the simplest way to create a <code>Locale</code> is with a
+    language code. So, let's add to the user interface&mdash; <strong>put in
+    a <code>JTextField</code> where a user can enter a language code,
+    and a button labeled "Add" that the user can click to add the
+      language to the list of locales</strong>. (While you're at it, you might
+    want to put some <code>JLabel</code>s in so the user can tell what
+    she's looking at.) To make this work, the main thing we need to do
+    is implement the button listener. There's two issues here...</p>
+
+  <p>First, what if the user enters an invalid language code?
+  The <code>Locale</code> documentation says that the constructor
+  doesn't do any checking, so we should check ourselves. Fortunately,
+    the <code>Locale</code> class will give an array of all legal
+    language codes; we just have to
+  call <code>Locale.getISOLanguages</code>. Also, how do we tell the
+  user whether the code was legal or not? Let's be subtle: if it's
+  legal code, then when the button is clicked, a new locale is added
+    to the <code>JList</code> and the text field is cleared. If the
+    language code is not legal, then nothing happens to
+    the <code>JList</code> and nothing happens to
+    the <code>JTextField</code> either.</p>
+
+  <p>The other issue: how do we add something to a <code>JList</code>?
+  There are a lot of methods in the API, but none seem to involve
+    changing the <em>contents</em> of the list. But wait!
+  A <code>JList</code> is an MVC-style component (which element of MVC
+    did we fiddle with above?)... and if we're talking about
+  the <em>contents</em> of the list, it sounds like we're talking
+    about the <em>model</em>. And actually, yeah, this is the first
+  thing discussed in the API documentation. The third sentence says
+    something about "the <code>JList</code> constructor that
+    automatically builds a read-only <code>ListModel</code> instance
+    for you." Uh-oh. Read-only? That sounds like I can <em>look
+      at</em> the contents, but I can't <em>change</em> them. I don't
+    want a read-only <code>ListModel</code>. But hang on&mdash;what is
+    this <code>ListModel</code>? Hmmm, let's keep
+    reading. Doo-de-doo... ah! "Simple
+    dynamic-content <code>JList</code> applications can use
+  the <code>DefaultListModel</code> class to maintain list elements."
+  That sounds promising... so <strong>pursue that idea in order to complete
+      your button <code>ActionListener</code></strong>.
+
+
+
+</body>
+</html>

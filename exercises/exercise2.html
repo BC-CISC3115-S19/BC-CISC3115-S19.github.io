@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+      <!-- Always force latest IE rendering engine & Chrome Frame -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+      <meta http-equiv="cleartype" content="on"/>
+
+<title>Exercise 2: StringPile</title>
+
+    <!-- Responsive and mobile friendly stuff -->
+    <!-- Stylesheets -->
+         <link rel="stylesheet" type="text/css" href="css/html5reset.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/col.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/8cols.css" media="all">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+</head>
+
+<body>
+  <div class="section group">
+    <div class="coursename span_8_of_8">
+      <a href="../index.html">CISC 3115</a>
+    </div>
+  </div>
+
+  <h2>Exercise 2: StringPile</h2>
+
+  <h3>Objectives:</h3>
+
+  <ul>
+    <li>Write a complete class definition.</li>
+    <li>Compile, run, and modify a multi-class Java program.</li>
+    <li>Use the Java API documentation to find useful classes and methods.</li>
+  </ul>
+
+
+  <h3>The Goal</h3>
+
+  <p>At the end of unit 2, we spent a little time in class on a program to do some <code>String</code> operations. In this exercise, you'll end up in the same place, but instead of just writing a main program, you're going to design and implement a class that does the real work.</p>
+
+
+  <h3>The <code>StringPile</code> class</h3>
+
+  <p>To remind you, here's the activity from unit 2:</p>
+
+  <div style="font-style: italic">
+  <p>Imagine a program that reads an arbitrary number of <code>
+      String</code>s in from the input (where each line of input is treated as a <code>
+      String</code>), then outputs: the shortest <code>
+      String
+    </code> (if multiple <code>
+      String</code>s have the shortest length, output the one that occurs first in the input), the longest <code>
+      String</code>
+
+    (again, if multiple <code>
+      String</code>s have the longest length, output the first-occurring one), and print the <code>
+      String</code>s in alphabetical order.</p>
+  </div>
+
+  <p>So the <code>StringPile</code> class is going to do most of that work. In particular, here's the class "skeleton":
+
+    <pre>
+      public class StringPile {
+        public void load(Scanner sc);
+        public String getShortest();
+        public String getLongest();
+        public void printInOrder(PrintStream ps);
+      }</pre>
+
+  <p>A couple notes: (a) the <code>load()</code> method takes a <code>Scanner</code> reference. In particular, you can pass a <code>Scanner</code> that "wraps" <code>System.in</code> (but you must set that up before you call <code>load()</code>, of course). Your method implementation should, of course, read from this <code>Scanner</code>; (b) similarly, <code>printInOrder()</code> will print to whatever <code>PrintStream</code> object its parameter refers to. In particular, you can pass in <code>System.out</code>.</p>
+
+  <p> Remember that you are not to implement the sort yourself, but to use the Java API.</p>
+
+  <p>Also note that you can detect the end of the input with a <code>Scanner</code> object by using the <code>hasNextLine()</code> method.</p>
+
+    <h3>Your Task</h3>
+
+    So, you have three things to do.
+    <ol>
+      <li>Implement the <code>StringPile</code> class. Notice that there is nothing here about implementation details. Do you need instance variables? Do you need to write any "helper" methods? What exactly should the <code>load()</code> method do? Another thing to think about: must every "get" method correspond to an instance variable? </li>
+      <li>Use your <code>StringPile</code> class to implement the exercise.</li>
+      <li>Create some test data and test your application.</li>
+
+
+      <p>Note you can do these in any order, or work on them simultaneously, as you wish: once you have the method signatures established, the implementation,  application, and testing of them should be totally separate.</p>
+
+      <h3>Final Thoughts</h3>
+
+      <p>As you're working on this (or when you're done), think about this: what about making a "generic" <code>Pile</code> class? That is, could we, in theory, write a version of this that would work for any type of object? (We haven't talked about the actual programming techniques for doing this, but we've seen how the <code>ArrayList</code> class is designed to serve as an "array" of any type of object.) If your answer is "yes," what kinds of changes would you have to make to your code? If your answer is "no," what's your problem? Do you mean this can only work for <code>Sring</code>s, or only some kinds of objects, or what? </p>
+
+ <hr/>
+</body>
+</html>
