@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <!-- Always force latest IE rendering engine & Chrome Frame -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="cleartype" content="on"/>
+
+    <title>Unit 2 Reading Guide</title>
+
+    <!-- Responsive and mobile friendly stuff -->
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="css/html5reset.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/col.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/8cols.css" media="all">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+  </head>
+
+  <body>
+    <div class="section group">
+      <div class="coursename span_8_of_8">
+        <a href="../index.html">CISC 3115</a>
+      </div>
+    </div>
+
+    <h2>Unit 2 Reading Guide</h2>
+
+    <h3>Learning Targets</h3>
+
+
+    <ol>
+      <li>I can write a class definition that includes instance variables and methods that use those variables.</li>
+      <li>I can distinguish between instance variables and local variables.</li>
+      <li>I can argue for the importance of encapsulation in class design, and use the <code>public</code> and <code>private</code> keywords appropriately.</li>
+      <li>I can write "enhanced" <code>for</code> loops and use them appropriately.</li>
+      <li>I can describe the class development process, including the role of test code.</li>
+      <li>I can find and the online Java API documentation in order to understand how to use a particular method in the API.</li>
+
+
+        </ol>
+
+    <p>Unit 2 covers chapters 4 through 6&mdash;sounds like a lot, but <em>most</em> of this material should be familiar. There are a few important new concepts, though!</p>
+
+    <p>The first part of chapter 4 contains stuff you should already know about writing methods. (In this chapter, it's in the context of class design, but the essential principles are the same.) In particular, I suspect you're already familiar with these ideas:</p>
+    <ul>
+      <li>Methods can be defined with <em>parameters</em>; when we call those methods, we pass <em>arguments</em> that match up, in order, with the parameters. This is how we send values to methods.</li>
+      <li>Methods can also return values (the result of the method's work, more or less) back to the caller. To do this, we declare the <em>return type</em> of the method, and use the <code>return</code> keyword to indicate that the method is terminating and sending a value back to the caller.</li>
+      <li>Values are passed back and forth to methods by <em>copying</em> them. The most important implication of this is that if a method changes the value of a parameter, the "original" value in the calling method will <em>not</em> be changed. This can get a little confusing if we're talking about parameters that are <em>references</em>. As the book says on p. 78, "if you pass a reference to an object into a method, you're passing a <em>copy of the remote control</em>."</li>
+    </ul>
+
+    <p>One of the most important ideas in Chapter 4 is <strong>encapsulation</strong> (starting on p 80). In your own words, what's the problem with the "<code>theCat</code>" scenario at the bottom of the page? After you read the "Java Exposed" dialog on p 81, pause and name as many advantages of encapsulation as you can. (Hint: it's not <em>only</em> about fixing <code>theCat</code>.)</p>
+
+    <p>The discussion on pp 84&ndash;5 highlights a small but important distinction in Java: different kinds of variables are initialized differently. Be sure you understand the distinction between <em>local</em> and <em>instance</em> variables.</p>
+
+    <hr/>
+
+    <p>Chapter 5 is based on a very siple game, basically a one-dimensional version of the game commonly known as "Battleship." The main focus of this chapter is developing a simple game program, including designing a few classes, from scratch. Note a few points about their recommended design process:</p>
+
+    <ul>
+      <li><strong>Start with a high-level design.</strong> The first page (p 97) focuses on the <em>general behavior</em> of the program, without <em>any</em> discussion of how this behavior might be implemented. Then they analyze the <em>things</em> in the program (like Brad did in Unit 1) and decide they'll need to define two classes.</li>
+      <li>Then begin roughing out the class designs: figure out what the class is supposed to do, identify the instance variables and methods it will need (i.e. what should these objects <em>know</em>, and what should they be able to <em>do</em>). Then write "prepcode" (also known as pseudocode)&mdash;this can be very useful in clarifying your assumptions.</li>
+      <li>But before you start working on writing actual Java code for your classes, you write <em>test code</em> for your class. This may strike you as unusual, but it's a very common approach to commercial software development. As the book explains, it became popular through "Extreme Programming," but now "Test-Driven Development" (or TDD) is kinda its own thing. If we have time later in the semester, we'll talk more about this. But for now, note that writing some test code first is useful, because it forces you to think very concretely about the desired behavior of each method.</li>
+    </ul>
+
+    <p>On p 105 there's a list of a few things that might be new to you. Be sure to study these (in the chapter), particularly if they <em>are</em> new to you.</p>
+
+    <p>Be sure you understand the game's code (bring questions to class)&mdash;and be sure you understand the problem that's pointed out on 113 (not that it's so hard...).</p>
+
+    <p>The discussion on p 114&ndash;115 should be familiar to you, but the <em>enhanced</em> for loop on p 116 may be new to you. Be sure you understand how it works.</p>
+
+    <p>You may or may not have discussed "casting" before. The first real discussion in this book is on p 117. Casting becomes more and more important as we advance in object-oriented programming, so spend some time on this page. In general, the casting operator is a way to force the compiler to convert a value of one type to another, even if it might not look like a good idea. We'll be talking about when the compiler does this kind of type-conversion automatically, when it can <em>never</em> be done, and when we as programmers need to explicitly tell the compiler to do it.  </p>
+
+
+    <p>As usual, the more time you can spend on the end-of-chapter paper-and-pencil exercises, the more successful you'll be in this class.</p>
+    <hr/>
+
+    <p>Chapter 6 has a strong focus on developing the full code for the "Sink-A-Dot-Com" game. So a lot of your reading here is studying code. The code discussion really starts on p. 144 (note the exercise they sneak in on pp. 146&ndash;147: take this exercise seriously, as it's a very good way for you to assess whether you understand what's going on with their code). The "ready-bake" code on pp. 152&ndash;153 is a little bit on the hairy side (it's the logic for randomly placing the dot-coms on the game board). There's nothing here you can't understand, but don't spend a ton of time trying to figure it out. If you have questions about the code, ask me in class or in office hours.</p>
+
+    <p>What about the rest of the chapter? There are a few valuable chunks scattered throughout....
+    </p>
+
+    <p>On pp. 129&ndash;130, why exactly would an <code>ArrayList</code> work better than a regular array?
+    </p>
+
+    <p>On pp. 142&ndash;143, carefully study the object relationships in the diagram. Notice that the arrows don't all mean quite the same thing&mdash;most of them mean "instantiates", as at the top of p. 142, but some of them represent method invocations (and returns). (Alternatively, you could view those "instantiates" arrows as references, right?)</p>
+
+    <p>P. 151 has a useful discussion about Boolean expressions. You should be generally familiar with these, but take note of a few significant ideas:
+      <ul>
+        <li>It's more important to <em>use parentheses</em> than to become a master of precedence.</li>
+        <li>You can apply the <code>!</code> operator directly to anything with a Boolean value.</li>
+        <li>There's a real difference between using "short circuit" and "non short circuit" operators; you should always be conscious of which you're using and why</li>
+      </ul>
+    </p>
+
+    <p>
+      Pp. 154&ndash;157 have a pretty detailed discussion of how Java's package system works, and what it's for. (It doesn't address the question of putting <em>your own code</em> in a package, which may come up later in the semester.) Again, you should be pretty familiar with the need to use <code>import</code> statements, but this discussion is really good background on what's going on.</p>
+
+    <p>
+      Finally, pp. 159&ndash;160 have a basic discussion of how to read/understand the Java API. We've already spent some time on this, of course; p. 160 is a nice summary of why the Java API documents online can be really useful.</p>
+
+
+
+    <hr/>
+  </body>
+</html>
