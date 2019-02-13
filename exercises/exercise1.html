@@ -12,7 +12,7 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
       <meta http-equiv="cleartype" content="on"/>
 
-<title>Exercise 1: Tic-Tac-Math</title>
+<title>Exercise 1: Mancala</title>
 
     <!-- Responsive and mobile friendly stuff -->
     <!-- Stylesheets -->
@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <h2>Exercise 1: Tic-Tac-Math</h2>
+  <h2>Exercise 1: Mancala</h2>
 
   <h3>Objectives:</h3>
 
@@ -42,22 +42,30 @@
     <li>Reflect on the limitations of the simplest Java class designs.</li>
   </ul>
 
+  <p><em>Remember that exercises are to be done by each of you, working on your own. You may discuss with your teammates, but everyone should be on their own keyboard. These exercises are opportunities for you to "test" your understanding of the unit's concepts.</em>
 
   <h3>The Game</h3>
 
-  <p><img  src="ttm.jpg" width="150" align="right" valign="middle" vspace="5" hspace="5"
-           alt="Image of a completed Tic-Tac-Math game. The top row is a 1, blank, 4; the second row is blank, 3, 7; and the bottom row contains only an 8 in the leftmost cell. A thick black line runs from the bottom left to the top right, through the cells containing 8, 3, and 4, indicating a winning sum of 15."/>
-    Tic-Tac-Math is a lot like Tic-Tac-Toe. The game is played on a 3x3 grid; players take turns marking one cell at a time. The difference is that instead of placing Xs and Os on the grid, the players place the numbers 1 to 9. And, instead of trying to make a row, column, or diagonal filled with 3 Xs or 3 Os, the players try to make a row, column, or diagonal whose cells sum to 15. One wrinkle: each number can only be placed ONCE. Play a couple games with a classmate. (You'll notice that while the game <em>resembles</em> Tic-Tac-Toe, the playing strategy is quite different.)</p>
+  <p> Mancala is <a href="tps://en.wikipedia.org/wiki/Mancala">very old game with many variants</a>. It's also regularly discussed in artificial intelligence courses, as the rules of play are quite simple but strategy is a bit complex, making it an ideal "target" for writing a program that can play it well.</p>
+
+  <p>But that's not our objective in this exercise: we're simply going to write a program that allows two people to play each other. And I've done most of the work for you. Here's what you need:
+    <ul>
+      <li>A <a href="http://ultraboardgames.com/mancala/game-rules.php">description of the rules</a></li>
+      <li>A <a href="https://www.coolmathgames.com/0-mancala">chance to play the game yourself for a few minutes</a> (you may want to turn off the sound and music)</li>
+      <li>and the code I've already written for you, in <a href="PlayMancala.java">PlayMancala.java</a> and <a href="MancalaBoard.java">MancalaBoard.java</a>.</li>
+    </ul>
+
 
   <h3>The Exercise</h3>
 
-  <p>In this exercise, you'll modify my simple implementation of this game. Download the files <a href="Board.java">Board.java</a> and <a href="TicTacMath.java">TicTacMath.java</a>. Put them in an appropriate folder (maybe a folder called "Exercise1" inside your "CISC3115" folder). Use javac to compile them, and java to run the program (what commands, exactly, should you use?)</p>
+  <p>In this exercise, you'll modify my simple implementation of this game. Download the source files and put them in an appropriate folder (maybe a folder called "Exercise1" inside your "CISC3115" folder). Use javac to compile them, and java to run the program (what commands, exactly, should you use?) Note that javac is pretty clever about figuring out what additional files need to be compiled.</p>
 
-  <p>As you play the game, you should notice that the basic game logic (you can't play twice in one square, you can't play the same number twice, wins are correctly detected) works, but there are still some problems. For example, the game doesn't make it very easy to visualize the state of the board. You may also find some obnoxious problems with the game flow.</p>
+  <p>The code runs, but it is obviously incomplete. In particular, you need to implement the "heart" of the game, the actions of a turn. As part of that, you need to implement logic to support two-player turn-taking. You should write at least one new method that implements this logic. You shouldn't need to modify any of the existing code, but you <em>do</em> need to understand its behavior, especially the behavior of the board display. You may also notice some API methods that are new to you; look them up!</p>
 
-  <p>If you haven't already, take a look at the code and get a sense of how it's organized. What are the two classes each responsible for doing? Which class should have the behavior of providing a visual summary of the state of the board? And what's the "cause" of any other problems you detect?</p>
+  <p>Once you have the game working correctly, take a step back and think about the object-oriented design of this program. Hint: it's not the best. How might you make this more object-oriented? What additional classes might make sense? It might be helpful to look at where you have duplicate (or nearly duplicate) code&mdash;that's often a sign of a design improvement that could be made.</p>
 
-  <p>Fix all the problems! This shouldn't take much more than about 20 lines. You shouldn't need to make big changes to the existing class design--at most, you might want to add a method; the rest of your work should just be modifying some existing methods.</p>
+  <p>We'll spend the last 10 minutes of this "session" discussing this and some other issues.</p>
+
 
 
 
