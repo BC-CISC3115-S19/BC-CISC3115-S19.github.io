@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+      <!-- Always force latest IE rendering engine & Chrome Frame -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+      <meta http-equiv="cleartype" content="on"/>
+
+<title>Unit 3 Reading Guide</title>
+
+    <!-- Responsive and mobile friendly stuff -->
+    <!-- Stylesheets -->
+         <link rel="stylesheet" type="text/css" href="css/html5reset.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/col.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/8cols.css" media="all">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+</head>
+
+<body>
+  <div class="section group">
+    <div class="coursename span_8_of_8">
+      <a href="../index.html">CISC 3115</a>
+    </div>
+  </div>
+
+  <h2>Unit 3 Reading Guide</h2>
+
+  <h3>Learning Targets</h3>
+
+  (This unit contains the <em>most important</em> object-oriented concepts we're going to encounter this semester&mdash;everything after this is basically applications of these concepts. So these learning targets are especially high-value.)
+
+  <ol>
+    <li>I can explain what "polymorphism" means in the context of object-oriented programming, and I can explain how it is implemented in the Java language.</li>
+    <li>I can use inheritance to create a class that is a modified form of another given class.</li>
+    <li>I understand the usefulness of abstract classes, what "abstract" means, and how to use abstract classes to ultimately create "real" objects.</li>
+    <li>I can create interfaces and write classes that implement those interfaces.</li>
+    <li>I understand overloading and overriding.</li>
+    <li>I can describe the "lifespan" of Java objects.</li>
+    <li>I can design classes with constructors and implement those constructors efficiently and effectively.</li>
+  </ol>
+
+  <p>In unit 3, we'll complete our coverage of basic object-oriented programming in Java. The main concept is <strong>polymorphism</strong>, which is achieved in Java through the use of <strong>inheritance</strong> (Chapter 7) and <strong>interfaces</strong> (Chapter 8). We'll also talk about the "life cycle" of an object (Chapter 9), including writing <strong>constructors</strong> for our classes and the <strong>garbage collection</strong> process.</p>
+
+  <p>
+    Chapter 7 starts with a look back to Chapter 2 and the saga of Brad and Larry. You might want to review that bit of Chapter 2 before you dig into Chapter 7. Chapter 7 actually starts with the final diagram (p. 32) of Brad and Larry's competition, but now there's more discussion of the terminology. The primary idea here is that of <em>superclasses</em> and <em>subclasses</em>. When we have a bunch of similar classes, we can analyze them, figure out <em>exactly</em> what the similarities are, and create a class&mdash;a <em>super</em>class&mdash; that captures all the ways those classes are the same. So the four specific shape classes are all <em>subclasses</em> of the <code>Shape</code> class. But as the <code>Amoeba</code> illustrates, a subclass doesn't have to be 100% identical to its superclass (if it were, what would be the point of creating a new class?). So a subclass is <em>basically</em> similar to its superclass, but it can do things differently. In the case of <code>Amoeba</code>, we need both a special-purpose <code>rotate()</code> method and a special-purpose <code>playSound()</code> method.
+  </p>
+
+  <p>
+    Maybe you're thinking, "Hmmm, but if we have to override <em>both</em> <code>Shape</code> methods for the <code>Amoeba</code>, then there's really no advantage to this subclass thing, at least in this case. Hold that thought: there are still advantages, even if we have to "redo" everything, and we'll see about them shortly.</p>
+
+  <p>Don't skip the "Brain Power" exercise at the bottom of p. 167.</p>
+
+  <p>
+    According to p. 168, what are the ways in which a subclass can be different from its superclass?</p>
+
+  <p>Again, don't skip the "Sharpen your pencil" on p. 169. </p>
+
+  <p>Notice: we have <strong>five pages</strong> (pp. 170&ndash;174) where we're doing a lot of programming work, but we're <em>not writing any code!</em> Indeed, as p. 170 says, we're doing <strong>design</strong>. As you become a more experienced programmer, you'll be finding yourself doing a lot more design before you write any code. In this case, we're doing <a href="https://en.wikipedia.org/wiki/Object-oriented_design">object-oriented design</a>, but depending your situation, there are plenty of other approaches to design. Many people argue that developing a good design is the most important of writing a successful application&mdash;put another way, most construction companies don't start building a house by deciding where the refrigerator goes. Anyway, make sure you understand why the diagram on p. 174 is shaped the way it is&mdash;there are other possibilities, of course, but be sure you follow the author's thought process.</p>
+
+  <p>What does "the lowest one wins" mean? Why is that important to understand?</p>
+
+  <p>Yup, do the "Sharpen your pencil" on p. 176.</p>
+
+  <p>The <strong>IS-A</strong> test is super-useful (though we'll talk about a situation where it can be a <em>little</em> confusing). Be sure you understand all the examples, and test yourself on p. 179.</p>
+
+  <p>Note the use of the word "super" on p. 180. And the relationship between access levels and inheritance.</p>
+
+  <p>Heads up! On p. 181, there's a mention of "design patterns," which seems to have a whole other book dedicated to it. This is indeed an important area of object-oriented design, and I'll point out a couple places where we use these "patterns" later in the semester.</p>
+
+  <p>The discussion that starts on p. 184 is the most essential part of the chapter&mdash;it's the <strong>why</strong> that justifies all the <strong>how</strong> stuff around inheritance. (It's also why we should write <code>Amoeba extends Shape</code> even if we have to override all the methods inherited from <code>Shape</code>. Be sure you understand why the code on p. 186 is INSANELY COOL (or something like that).</p>
+
+  <p>
+    The chapter ends with a short discussion of <em>overloading</em> versus <em>overriding</em>. This is a very important difference, and one that a lot of people mess up. (Believe me, you do not want to use the wrong word on a job interview!!)
+  </p>
+  <hr/>
+
+  <p>Chapter 8! Time to get serious. The previous chapter was a slightly "theoretical" analysis of what it means to create a class structure with good inheritance relationships. In this chapter, we'll look at several more practical aspects of polymorphism&mdash;what happens when we start to try to write <strong>real code</strong> for/with such class structures?</p>
+
+  <p>Write down all the reasons the class structure on 198 is good.</p>
+
+  <p>The first topic of this chapter is <code>abstract</code> classes (and methods). Write down for yourself a definition of "abstract class." (What is the opposite of abstract?) BTW, different object-oriented languages may use different keywords to represent this concept.</p>
+
+  <p>Before you look at p. 202, mark the classes on p. 198 that should be declared abstract.</p>
+
+  <p>At the top of p. 202, there's a nice hint about why we're going to be studying Java's GUI mechanisms&mdash;the API for this makes <strong>very</strong> heavy use of polymorphism, so if you're wondering, "Gracious me [because you're polite that way], does all this stuff actually make a difference? I mean, other than for Brad?" we'll be getting into real-world examples in the next couple units.</p>
+
+  <p>At the bottom of p. 202, there's a good question: how do you know when a class should be abstract? Let me give you one wrong answer... if you look at the diagram on p. 202, you might note that abstract classes occupy certain positions in the tree, and you might be tempted to answer the question based on that structural observation. But this is just <strong>one</strong> example of an inheritance tree, so don't be fooled. It's perfectly possible to have an inheritance tree where the "root" class is not abstract, then some descendants are abstract, then further down they're not abstract, etc. The "Sharpen your pencil" exercise on p. 205 will help you think about this further.</p>
+
+  <p>Remember in class when I said "every class, even one declared as <code>class EmptyClass {}</code>, has an <code>equals()</code> method and a <code>toString()</code> method, and we'll talk about that later?" Well, later is now. The discussion starting on p. 208 explains how I wasn't talking nonsense: The entire universe of Java classes is in one giant inheritance tree, with a root class named <code>Object</code>. That initially sounds a little warped and confusing (a class named "object"?), but you'll get used to it: this class represents the most basic things that an object "knows" or "can do." (Note a slightly confusing thing the book does: it starts this discussion talking about "what if you wanted to make your own <code>List</code> class, because you didn't know about <code>ArrayList</code>?" But remember that <code>ArrayList</code> uses the angle bracket "generic" technique; the <code>Object</code> class doesn't show up so very much. Actually, you might want to review the<a href="https://docs.oracle.com/javase/10/docs/api/java/util/ArrayList.html#method.summary"> documentation for ArrayList</a> &mdash; look at how <code>Object</code> is used there. Pay attention later in the chapter when the book talks about this a little more.)</p>
+
+  <p>Be sure to review p. 210 carefully; it contains discussions of some important details of how <code>Object</code> can be used (and can't be used). The illustration on p. 211 is particularly important.</p>
+
+  <p>The diagram on p. 214 (and the similar one on p. 215) illustrates another important truth: an object of a particular class contains both the "stuff" belonging to that class, but also the stuff from all the classes above it on its inheritance tree.</p>
+
+  <p>On p. 216, a discussion of a slightly different, and very important, kind of casting: we've mostly been talking about casting between primitive types, but now we see that the casting operation can be applied, in a limited way, to reference types. What exactly are the limitations here?</p>
+
+  <p>Spend some time on p. 218 BEFORE YOU TURN THE PAGE. (And stop reading this guide, too!) First, make sure you understand the problem (which takes some careful thinking). Then, see if you can think of any possible solutions.</p>
+
+  <p>Starting on p. 219, we address the last, and probably most important, topic of this chapter. The next three pages work through some possible solutions to the problem on p. 218. Take your time with this stuff. Again, in each case, make sure you understand the "solution" as well as why it's not a very good one.</p>
+
+<p>The illustration on p. 223 is definitely a 2005 example (raise your hand if you own either a CD burner or a DVD burner), but it should be clear why the "Deadly Diamond of Death" is Deadly. (And despite having a name that sounds like the book authors created it, this is <a href="https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem">a real thing</a>.)
+
+<p>The Java API uses tons of interfaces. For example, check out <a href="https://docs.oracle.com/javase/10/docs/api/java/util/List.html">the <code>List</code> interface</a>
+  (which you may have already seen before...). Notice that almost all the <code>ArrayList</code> methods are part of this interface. Remember, this interface describes "what it means" to be a <code>List</code>, but provides <strong>no implementation details</strong>: the <code>ArrayList</code> writers had to implement all those methods!</p>
+
+  <p> The summary on p. 227 is worth memorizing, as close as you can. It's a concise guide to using interface (versus using inheritance). Later, when we talk about GUI in Java, we'll see how powerful this difference can be.</p>
+
+  <p>As you reach the end of the chapter, be sure you've picked up all the new Java keywords that appeared in the chapter... <code>final</code>, <code>instanceof</code>, and <code>super</code>, as well as the more obvious ones.</p>
+
+  <p>Yup, the exercises on p. 231 and 232 are good for you. Don't just look at them and think about the answers. Write the answers down on an actual piece of paper.</p>
+<hr/>
+  <p>Finally (for now): Chapter 9. All your questions about life and death answered....</p>
+
+  <p>The words "stack" and "heap" have come up a few times in the reading, but now we're looking closely at what they mean and how they're different. Note the distinction the book makes between <em>local</em> variables and <em>instance</em> variables.</p>
+
+  <p>The diagram of the "stack" on p. 237 if a very important one&mdash;we'll be using this visualization of function calls later in the semester, and it is also very important in some advanced courses (like operating systems, architecture...). Similarly, the diagram on p. 238 is a good way to check your understanding of references&mdash; note that the <em>reference</em> are on the stack, but the actual object is in the <em>heap</em>. (Can references be in the heap? Can objects be on the stack?)</p>
+
+  <p>The discussion on p. 239 is a good transition from the stack/heap discussion to the "object creation" discussion. In particular, notice near the bottom of the page that we can <em>declare a reference variable</em> without actually <em>creating an object</em>. No object is created until the <code>new</code> keyword is used.</p>
+
+  <p>As the discussion on p. 241 says, you might have wondered at some point if the expression <code>new Duck()</code> is invoking a method&mdash;that's what parentheses usually signifies! And that's a good intuition to have; object creation does indeed involve executing a special piece of code that seems kinda like an "object-creating method." But as the book says, this <em>constructor</em> isn't exactly a method: for one, it can only be invoked using <code>new</code>, and it doesn't have a return type. That is, it is <em>only</em> used to create a new object of a particular class, and the result of its execution is a new, initialized instance of that class.</p>
+
+  <p>On p. 245, the book discusses the importance&mdash;and the possibility&mdash;of writing multiple constructors. This is a really important and useful thing! As the book says, you should always write a "no-arg" constructor that creates a "default" instance of your class. If you want the user to be able to "customize" the objects that are created, then you can also write parameterized versions of the constructor. You can see this all over the Java API&mdash;take another look at the <a href="https://docs.oracle.com/javase/10/docs/api/java/util/Scanner.html">Scanner</a> documentation. You can create <code>Scanner</code>s from all kinds of things, as we've seen... files, strings, other more exotic things. That's because the <code>Scanner</code> class offers constructors for all those options.
+
+  <p>Creating objects also involves thinking about the inheritance tree... if I write a constructor for a subclass, how do I make sure that all the "superclass stuff" gets properly initialized? It's not as messy as it sounds, but it is something we have to think about. The discussion on 250&ndash;255 addresses this.</p>
+
+  <p>The discussion on p 256 is much less complicated, but it's also very important for good practice: you can call one constructor from another! Why would you want to do that? Sounds like it could cause the apocalypse. But it's actually a very powerful way of making sure you only have to write code once (or, avoiding duplicate code). Look at how the tiny example on 256 has the default constructor calling one of the parameterized constructors.</p>
+
+  <p>The final topic of the chapter is the "lifespan" of objects and variables in Java. The discussion on p. 258 starts things off, but it will take a few pages to get the "whole story." The distinction between "life" and <em>scope</em> on p. 259 is an important distinction! (You should be sure to become familiar/comfortable with the concept of "scope," as it's something that comes up in a lot of programming contexts.) The last several pages of the chapter (261&ndash;267), including the exercises, should give you a good sense of how "garbage collection" works.</p>
+
+<hr/>
+
+
+</body>
+</html>
