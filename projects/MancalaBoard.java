@@ -1,17 +1,25 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ *
+ * Game logic for mancala.
+ * 
+ * @author Scott Dexter
+ * @version 1.1 2/26/2019
+ *
+ */
+
 public class MancalaBoard {
 
     // if one player's pits are empty, the game is over
-    final int GAMEOVER[] = {0,0,0,0,0,0};
+    public static final int GAMEOVER[] = {0,0,0,0,0,0};
 
     // number of pits for each player
-    final int BOARDSIZE = 6;
+    public static final int BOARDSIZE = 6;
     
     // these values represent the number of 'stones' in the pits and mancalas of players 1 and 2
     // we will treat player 1 as "south" with right mancala, player 2 as "north" with left mancala 
-
     int mancala1, mancala2;
     int[] pits1 = new int[BOARDSIZE];
     int[] pits2 = new int[BOARDSIZE];
@@ -20,7 +28,7 @@ public class MancalaBoard {
      *
      * Sets all board values to beginning-of-game values.
      *
-     **/
+     */
 
     void initialize() {
         mancala1 = mancala2 = 0;
@@ -32,7 +40,7 @@ public class MancalaBoard {
      *
      * Coordinates the play of one game.
      *
-     **/
+     */
 
     void play() {
         Scanner kbd = new Scanner(System.in);
@@ -56,10 +64,12 @@ public class MancalaBoard {
     /**
      *
      * Verifies validity of selected pit--checking both that it's in range and that
-     * the selected pit has stones to play
+     * the selected pit has stones to play.
      *
-     **/
-    
+     * @param pit The number of the selected pit
+     * @return true if selected pit is viable to play from
+     *
+     */
     
     boolean valid(int pit) {
         if (pit < 1 || pit > BOARDSIZE) {
@@ -72,12 +82,11 @@ public class MancalaBoard {
         return true;
     }
 
-
     /**
      *
      * Displays the current state of the game.
      *
-     **/
+     */
 
     void display() {
         System.out.println("   1   2   3   4   5   6  ");
@@ -97,9 +106,9 @@ public class MancalaBoard {
 
     /**
      *
-     * Displays the number of stones in the pits of one player.
+     * Displays the number of stones in the pits of the "south" player.
      *
-     **/
+     */
 
     void displayPitsSouth(int[] pits) {
         for (int i=0; i<pits.length; i++) {
@@ -107,6 +116,12 @@ public class MancalaBoard {
         }
         System.out.println();
     }
+
+    /**
+     *
+     * Displays the number of stones in the pits of the "north" player.
+     *
+     */
 
     void displayPitsNorth(int[] pits) {
         for (int i=BOARDSIZE-1; i>=0; i--) {
@@ -117,14 +132,17 @@ public class MancalaBoard {
 
     /**
      *
-     * processes one play of player 1
+     * Processes one play of player 1
      *
-     **/
+     * @param pit number to play from
+     * @return 0 if another turn is warranted; -1 if problems arose; positive value otherwise
+     *
+     */
 
     int playMove(int pit) {
 
         int stones = pits1[pit-1];  // number of stones to drop 
-        pits1[pit-1] = 0;            // clear starting pit
+        pits1[pit-1] = 0;           // clear starting pit
         int last = 0;               // number of stones in last pit played (0 means play again)
 
 
@@ -203,6 +221,8 @@ public class MancalaBoard {
      *
      * Add n stones to each pit and mancala.
      *
+     * @param n The number of stones to add.
+     *
      **/
     
     void incrementAll(int n) {
@@ -217,6 +237,7 @@ public class MancalaBoard {
     /**
      *
      * if game is over, return 1 or 2 to indicate winning player or 0 if tie; if not over return -1.
+     * @return 1 or 2 to indicate winning player, 0 to indicate tie, or -1 if game not over.
      *
      **/
 
