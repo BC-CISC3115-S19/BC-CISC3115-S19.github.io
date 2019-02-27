@@ -70,17 +70,16 @@
 
     <pre>
       public class StringPile {
-        public void load(Scanner sc);
-        public String getShortest();
-        public String getLongest();
-        public void printInOrder(PrintStream ps);
+        public void load(Scanner sc)
+        public String getShortest()
+        public String getLongest()
+        public void printInOrder(PrintStream ps)
       }</pre>
 
-  <p>A couple notes: (a) the <code>load()</code> method takes a <code>Scanner</code> reference. In particular, you can pass a <code>Scanner</code> that "wraps" <code>System.in</code> (but you must set that up before you call <code>load()</code>, of course). Your method implementation should, of course, read from this <code>Scanner</code>; (b) similarly, <code>printInOrder()</code> will print to whatever <code>PrintStream</code> object its parameter refers to. In particular, you can pass in <code>System.out</code>.</p>
+  <p>A couple notes:
+    <ul><li>the <code>load()</code> method takes a <code>Scanner</code> reference. In particular, you can pass a <code>Scanner</code> that "wraps" <code>System.in</code> (but you must set that up before you call <code>load()</code>, of course). Your method implementation should read from this <code>Scanner</code>;</li><li> similarly, <code>printInOrder()</code> will print to whatever <code>PrintStream</code> object its parameter refers to. In particular, you can pass in <code>System.out</code>.</li></ul>
 
-  <p> Remember that you are not to implement the sort yourself, but to use the Java API.</p>
-
-  <p>Also note that you can detect the end of the input with a <code>Scanner</code> object by using the <code>hasNextLine()</code> method.</p>
+Remember that you are not to implement the sort yourself, but to use the Java API. Also note that you can detect the end of the input with a <code>Scanner</code> object by using the <code>hasNextLine()</code> method.</p>
 
     <h3>Your Task</h3>
 
@@ -89,13 +88,31 @@
       <li>Implement the <code>StringPile</code> class. Notice that there is nothing here about implementation details. Do you need instance variables? Do you need to write any "helper" methods? What exactly should the <code>load()</code> method do? Another thing to think about: must every "get" method correspond to an instance variable? </li>
       <li>Use your <code>StringPile</code> class to implement the exercise.</li>
       <li>Create some test data and test your application.</li>
-
+    </ol>
 
       <p>Note you can do these in any order, or work on them simultaneously, as you wish: once you have the method signatures established, the implementation,  application, and testing of them should be totally separate.</p>
 
+      <h3>For a little more fun</h3>
+
+  <p><code>ArrayList</code>s are supposed to work on arbitrarily large datasets, right? So try your code on <a href="words.txt">this file of nearly 500,000 words</a>. When we get to that amount of data, the efficiency of your code really starts to make a difference. How long does each of your methods take to do its work?</p>
+
+  <p>Fortunately, the Java API includes some methods to help us find out. <a href="http://www.techiedelight.com/measure-elapsed-time-execution-time-java/">this page</a> has a more detailed explanation, but here's the code we need to time the execution of a chunk of code:
+
+   <pre>
+      long startTime = System.nanoTime();
+
+      // ... this is the code we want to time ...
+
+      long endTime = System.nanoTime();
+      System.out.println("That took " + (endTime - startTime)/1000000.0 + " milliseconds);</pre>
+
+(Note that I divided by a million in <em>floating point</em> to get fractional milliseconds.)</p>
+
+  <p>Use this technique to time the calls to the four methods in your <code>StringPile</code> implementation. These should be, y'know, pretty fast, though the exact timings will depend on your hardware and other factors. </p>
+
       <h3>Final Thoughts</h3>
 
-      <p>As you're working on this (or when you're done), think about this: what about making a "generic" <code>Pile</code> class? That is, could we, in theory, write a version of this that would work for any type of object? (We haven't talked about the actual programming techniques for doing this, but we've seen how the <code>ArrayList</code> class is designed to serve as an "array" of any type of object.) If your answer is "yes," what kinds of changes would you have to make to your code? If your answer is "no," what's your problem? Do you mean this can only work for <code>Sring</code>s, or only some kinds of objects, or what? </p>
+      <p>As you're working on this (or when you're done), think about this: what about making a "generic" <code>Pile</code> class? That is, could we, in theory, write a version of this that would work for any type of object? (We haven't talked about the actual programming techniques for doing this, but we've seen how the <code>ArrayList</code> class is designed to serve as an "array" of any type of object.) If your answer is "yes," what kinds of changes would you have to make to your code? If your answer is "no," what's your problem? Do you mean this can only work for <code>String</code>s, or only some kinds of objects, or what? </p>
 
  <hr/>
 </body>
