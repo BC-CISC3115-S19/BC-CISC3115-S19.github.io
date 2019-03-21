@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+      <!-- Always force latest IE rendering engine & Chrome Frame -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+      <meta http-equiv="cleartype" content="on"/>
+
+<title>Unit 4 Reading Guide</title>
+
+    <!-- Responsive and mobile friendly stuff -->
+    <!-- Stylesheets -->
+         <link rel="stylesheet" type="text/css" href="css/html5reset.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/col.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/8cols.css" media="all">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+</head>
+
+<body>
+  <div class="section group">
+    <div class="coursename span_8_of_8">
+      <a href="../index.html">CISC 3115</a>
+    </div>
+  </div>
+
+  <h2>Unit 4 Reading Guide</h2>
+
+  <h3>Learning Targets</h3>
+
+
+ (This unit serves two functions: to give you some basic exposure to GUI porgramming concepts, and to illustrate how object-oriented techniques and design are used "in real life.")
+
+  <ol>
+    <li>I can describe the difference between event-driven programming and "procedural" programming.</li>
+    <li>I understand how interfaces are used to facilitate event-handling in Java.</li>
+    <li>I can use subclassing and overriding to provide customized behavior of GUI components. </li>
+    <li>I can use the <code>paintComponent()</code> and <code>repaint()</code> methods to ensure GUI components are drawn at the right time(s). </li>
+    <li>I can write inner classes to support the behavior of a GUI application.</li>
+    <li>I can use layout managers to control the appearance of a GUI application.</li>
+  </ol>
+<p>In unit 4, we'll go into some pretty good depth on how to create Graphical User Interfaces (GUIs) in Java. This is pretty big change of subject&mdash;we're not looking at the <em>language</em> of Java as much as we're looking at the <em>libraries</em> of Java. However, as you'll see, GUI programming in Java makes very extensive use of interfaces and inheritance, so if you're not quite sure how or why to use these concepts "in the real world," you'll get a big dose in this unit.</p>
+
+  <p>It's also worth having a little background about Java's GUI technology, just because you'll read/hear about several things in this area. When Java first came out, the GUI framework was a set of classes and interfaces called the "Abstract Windowing Toolkit," or AWT. There were some problems with this approach, so another framework, called "Swing," came out. Swing uses the AWT as its foundation, so when you look at Swing documentation, you will see stuff from both <code>javax.swing</code> packages and <code>java.awt</code> packages. We'll be using Swing for this class&mdash;but Java has a new GUI framework now, called JavaFX. While this is probably what <em>brand new</em> Java applications will use going forward, there are a lot of applications out there using Swing, so you're just as likely to encounter Swing code (if you pursue a career in Java programming). So, if you find yourself reading about Java GUI stuff online, don't get distracted by JavaFX discussions (though of course it will be easy for you to understand how JavaFX works once we've gone through Swing).</p>
+
+  <p>I STRONGLY ENCOURAGE YOU to work with the program code as you read the chapter. Don't forget that the source code for most of the book's programs can be downloaded, so you don't even have to type them (unless you want to).
+
+  <p>When we talk about GUI applications, there are a few different elements we have to understand. This is a theme I want you to keep track of as you do you the reading for this unit (and as we discuss things in class). What are the different "jobs" that need to be done in a well-functioning GUI application? How does the Java API distribute those jobs among different kinds of classes? How are those jobs coordinated? These are all good <em>design</em> questions, and the more clearly you understand the design decisions made by the Java architects, the stronger your own foundations will be.</p>
+
+
+    <p>Anyway. One of those general jobs is <em>layout</em>&mdash;how do we put GUI components on the screen, in the right place? This is somewhat related to issues of <em>drawing</em> and animation&mdash;how do we work with elements of the display that aren't about control (like buttons, etc). And finally <em>behavior</em>&mdash;how do we make the elements of our GUI do what we want them to?</p>
+
+  <p>Chapter 12 starts with a very simple application&mdash;a button in an application window. Setting that up just takes a few lines of code. But as we see on pp. 355&ndash;6, the button is a little large&mdash;and it doesn't really do anything! So the discussion starting on p. 356 is our first discussion of <em>event-driven programming</em>&mdash;instead of telling the user what to do (like "enter a number") and waiting for them to do it, event-driven programs sit around waiting for the <em>user</em> to tell the <em>program</em> what to do.</p>
+
+  <p>In general, "event-driven programming" is used to refer to any kind of programming where the program is designed to spend most of its time waiting for something interesting to happen, then reacting to it (you'll sometimes hear this kind of thing called "reactive programming"). If you think about it, an operating system is substantially designed this way&mdash;<em>mostly</em> it sits there waiting for you to do something. In the particular context of GUI programming, the "events" are (almost always) <em>user actions</em>, like clicking a button, that demand a response from the program. So, on p. 357&ndash;8, we start to see how event-driven programming works in Swing. Because everything in Java is an object, everything in GUI-land is, well, an object! One object is the "event source" (like a button... what is the name of the button class, exactly?) Another object represents the event itself (in the case of a button-click event, the event is represented by an <code>ActionEvent</code> object, which includes crucial information like a reference to the event-source object). And yet another object is the "listener," who wants to know when "something interesting" happened and is responsible for coordinating the response.</p>
+
+
+  <p>This "listener" is one of the best explanations I can think of for "why do we need interfaces?" Ideally, <em>any</em> kind of object should be able to "sign up" to listen for, and respond to, button clicks. It shouldn't matter at all what kind of object it is&mdash;as long as it has the capacity to listen. This is exactly the principle behind interfaces&mdash;any class can implement any interface; it just has to provide implementations of that interface's methods.</p>
+
+  <p>In the case of listening to button-clicks, the "listener interface" is called <code>ActionListener</code>, and it just has one method, <code>void actionPerformed(ActionEvent event)</code>. One thing to note about this method: it says absolutely nothing about buttons! In fact, <code>ActionEvent</code>s can come from several different kinds of GUI elements, and indeed any <code>ActionListener</code> can, if it needs to, listen to several different elements at the same time.</p>
+
+  <p>Look closely at the code on p. 360. Who's listening to the button? The same class that holds the <code>main()</code> method! This is an OK choice given that this is a small example, but as things get more complicated, we'll see that generally it can get messy to combine the "I'm the main program" role of a class and the "I'm an event listener" role of a class. As you read more GUI code, you'll see other approaches to setting up the class relationships. Make sure you run the code on p. 360&mdash;does it work? What is supposed to happen when you click the button? What is supposed to happen if you click the button <em>again</em>?</p>
+
+  <p>Oooh... notice the gray box on p. 362. It advises: "Look in the API." Yes, this will become more and more important as we explore the Swing packages....</p>
+
+  <p>On p. 363, the discussion briefly switches to graphics. We're probably not going to spend as much time on graphics as we are on event-handling, but you certainly need to understand the basic ideas. In Swing, we usually do graphics in the context of <code>JPanel</code> object. As the documentation describes, a <code>JPanel</code>is a generic container&mdash;it doesn't do much, but we can customize it quite heavily. If we're talking about graphics, we're focusing on one particular method, <code>void paintComponent(Graphics g)</code>, which uses a <code>Graphics</code> object to draw (or paint?) shapes and lines on its component. Here's the thing: the <code>JPanel</code> class has such a <code>paintComponent()</code> method, but its implementation is empty&mdash;it doesn't do anything! And we can't <em>change</em> that implementation&mdash;this is something built into the Java API! So why did the API designers give us this weird empty method? Because it's <em>meant to be overridden</em>. That is, to use the <code>JPanel</code> class, we <code>extend</code> it, which gives us all the useful (and mysterious) default behavior of a Swing component, but then we can <em>customize</em> the behavior we want (like <code>paintComponent</code>by overriding it. That's what you see on p. 364.</p>
+
+  <p>Note that the code "annotations" on p. 364 say something about "Never call this yourself." That refers to the <code>paintComponent()</code> method. Indeed, this is not a method you should ever call. So what's the point? The point is: it's your job, as the creator of this amazing component that draws an orange rectangle, to specify <em>how</em> it should be drawn on the screen. It is <em>not</em> your job to decide <em>when</em> it should be drawn&mdash;that's the job of the rest of the Swing library, along with the Java runtime and the operating system. The meaning of a Swing component's <code>paintComponent()</code> method is, "If you need to draw me on the screen, call this method and it'll draw me." It's up to the system to decide when it needs to do that&mdash;for example, when the component is first displayed on the screen, or when the application is minimized and then reactivated; maybe when another window moves "on top" of the application and then is cleared away.</p>
+
+  <p>Another way you can tell you're not supposed to call <code>paintComponent()</code>: you don't have a <code>Graphics</code> object to pass. Sure, you could try to create one (look it up in the API!), but in fact the <code>Graphics</code> object needs to include a lot of behind-the-scenes information about the component (again, the API does provide lots of interesting info about what a <code>Graphics</code> object does&mdash; and there's even more information about the <code>Graphics2D</code> class, which, as the book points out, extends <code>Graphics</code> and therefore offers much more powerful behavior. However, this is not a course that emphasizes graphics, so we're mostly going to be content with plain old <code>Graphics</code> behavior.)</p>
+
+  <p>The final discussion of the reading for the RAT starts on p. 369: "can we paint graphics when we get an event?" It's a little hard to tell what's happening here, but it's not complicated: we're going to write a simple program that has a button and a drawing area (<code>JPanel</code>). When the program starts running, a circle of a random color is drawn, and every time the button is clicked, the circle is drawn with another random color. This simple application requires a few new(ish)ideas:
+    <ul>
+      <li>Forcing a graphics component to redraw itself;</li>
+      <li>Making sure that control components (like buttons) don't overlap graphical elements;</li>
+      <li>Syncing up the graphics-drawing with the button-clicking (that is, another example of event-handling).</li>
+    </ul>
+  </p>
+
+  <p>Forcing a component to redraw is easy: we can call its <code>repaint()</code> method. So while we <em>can't</em> call <code>paintComponent()</code> to draw a component, we <em>can</em> call <code>repaint()</code>, which basically says, "hey, drawing system, when you get a chance, redraw this component." We don't have much control over <em>when</em> that happens&mdash;it will be soon, but not necessarily instantaneous.</p>
+
+  <p>Making sure that graphical and control components don't overlap is the job of a <em>layout manager</em>. When we add components to a Swing application (that is, a <code>JFrame</code>), the layout manager decides where they go. So if we have a <code>JPanel</code> that draws random-colored circles and a nice juicy clickable <code>JButton</code>, we can, in general, add them and let the layout manager decide what to do. But there are different ways to approach layout, which you can tell by looking at how many Swing classes implement the <a href="https://docs.oracle.com/javase/10/docs/api/java/awt/LayoutManager.html"><code>LayoutManager</code> interface</a>. The book's example uses a <code>BorderLayout</code>.</p>
+
+  <p>Finally, syncing up the button-click with the graphics-drawing, in this case, just means putting a call to <code>repaint()</code> in the event handler. Here's a way to test your understanding so far.... Notice that in the code pn p. 371, when the button is clicked, the <em>entire frame</em> is repainted. But it doesn't need to be! Indeed, the only element of this application that "cares" about the button being clicked is the <code>MyDrawPanel</code> object. So, think about making two modifications:
+    <ol>
+      <li> (Relatively easy.) Change the code so that only the <code>MyDrawPanel</code> is repainted.</li>
+      <li>(A little trickier.) Then change the code so that the <code>MyDrawPanel</code> is the listener (and so it repaints itself).</li>
+    </ol>
+  </p>
+
+  <p>Continuing on past p. 371... The focus here is on how to design an application with multiple event-generating components. How do we do that? Review the 3 options on pp. 373&ndash;374. The first option considers the idea of writing one event-handling method for each event-generating component. But in the case of two buttons, we'd have to write two <code>actionPerformed</code> methods, which isn't legal code. Option two considers the approach I took on the example I passed out during our first day of application activities: write <em>one</em> event-handling method, and ask the event object which component it came from. This is fine for toy examples, but it's a slightly Larry-like approach (remember his approach was basically to write a big if statement; if it's a square do this, if it's an amoeba, do that, etc. We're doing essentially the same thing here&mdash;so the question is really, "What Would Brad Do?"). Option three is more Brad-sounding&mdash;create more classes! So here the idea is to create two different classes that implement <code>ActionListener</code> with different <code>actionPerformed</code> methods. But this also has a limitation&mdash;it's not easy to connect these <code>ActionListener</code> classes with the GUI itself (as the book says, it's doable, but it gets very messy very fast).</p>
+
+  <p>So pp. 375&ndash;379 present the properly Brad-like solution: <em>inner classes</em>. Here, we take the goodness of option three (separate <code>ActionListener</code> classes for each possible event), but we apply that goodness in a new and interesting way. The idea is that no objects outside the little GUI world care about how the button-clicks are handled. If we can deal with that <em>completely</em> inside a single class, that's one less thing that "outsiders" have to worry about&mdash;that is, this is a kind of encapsulation. But we also get an implementation advantage: if we define the event-handlers as <em>inner classes</em>, then those objects/classes have access to all the instance variables of the outer class. Which solves the problems of option three.</p>
+
+  <p>Note that there's really no special syntax to these inner classes: you just put an entire class definition inside another! The only slightly odd thing (to my mind) is that you have to also remember to create <em>instances</em> of your inner classes, as you need them. But the code on p. 379 shows that this is not much different from what we were doing before&mdash;instead of passing a reference to an instance of the outer class (<code>this</code>), which used to be our <code>ActionListener</code>, now we pass a reference to a freshly-created instance of one of our special-purpose inner classes. Note that we don't even save a reference to this new instance&mdash;we just pass it to the button and forget about it.</p>
+
+  <p>The last bit of this chapter looks at another application of inner classes: note that the <code>SimpleAnimation</code> class makes heavy use of <code>JPanel</code> and <code>paintComponent</code>, but it doesn't extend <code>JPanel</code>; instead it uses an inner class that <em>does</em> extend <code>JPanel</code>, and takes advantage of the tight relationship between inner classes and instance variables to achieve some pretty non-messy animation code. By the way, "inner classes" are one of three kinds of <em>nested</em> classes in Java&mdash;you may also hear about local and anonymous classes. And who knows, we may even talk about those at some point.</p>
+
+  <p>The Code Kitchen that concludes the chapter is interesting but not required. Remember you can download most of the book's code, so it's certainly worth downloading this code and playing with it some.</p>
+
+  <p>Don't forget the exercises! P. 395&ndash;396 are especially worth going through.</p>
+  <hr/>
+
+  <p>Now that we have some basic Swing knowledge, Chapter 13 introduces more stuff from the library. It starts with a big-picture view: Swing <em>components</em>, and the idea of putting "interactive" components into "background" components (even though that is not always a 100% clear distinction).</p>
+
+  <p>The rest of the chapter covers essentially two things: some more choices for layout manager, and a handful of other useful Swing components. It's not that important for you to, say, memorize all the features/policies of different layout managers, but it <em>is</em> important to understand what a layout manager's "job" is, and how much variation there can be in how it does that job. This line from p. 401 starts to give you a sense: "Layout managers have their own policies to follow when building a layout. For example, one layout manager might insist that all components in a panel must be the same size arranged in a grid, while another layout manager might let each component choose its own size, but stack them vertically."</p>
+
+  <p>So, as you read pp. 402&ndash;411, focus on understanding the effect of "policy" on the layout the book illustrates.</p>
+
+  <p>Finally, look at the Swing components "gallery" that concludes the chapter. As the book notes, there is more to these components than the book presents. For example, the <a href="https://docs.oracle.com/javase/10/docs/api/javax/swing/JTextField.html">API entry for <code>JTextField</code></a> talks about <code>DocumentEvent</code> and <code>DocumentListeners</code>. (And check out the bit of code where they create an "<code>UpperCaseField</code>" by extending <code>JTextField</code>&mdash;there's some magical stuff going on here (what's this talk about "the model"?) but note how it's really pretty easy to customize these Swing components. (Don't forget about the <code>JLabel</code> component!) </p>
+
+  <p>Note how two components (<code>JScrollPane</code> and <code>JTextArea</code>) are combined (with another <code>add()</code> operation). Of course, it's not required that you put every text area in a scrolling pane, but it's a common-enough thing to do. Note the explanation in the <a href="https://docs.oracle.com/javase/10/docs/api/javax/swing/JTextArea.html">API docs</a>: you can put a <code>JTextArea</code> inside a <code>JScrollPane</code> because <code>JTextArea</code> <em>implements the <code>Scrollable</code> interface</em>. Also note that, although the book doesn't discuss any events, <code>JTextArea</code>, like <code>JTextField</code>, does issue <code>DocumentEvents</code> when the text changes. (Hmmm... does the inheritance tree give you any hints about why these two components have such similar behaviors?)</p>
+
+  <p>The <code>JCheckBox</code> isn't too complicated (even the <a href="https://docs.oracle.com/javase/10/docs/api/javax/swing/JCheckBox.html">API docs</a> agree). But notice that the events it issues are <a href="https://docs.oracle.com/javase/10/docs/api/java/awt/event/ItemEvent.html"><code>ItemEvent</code>s</a>. The <code>JList</code> also uses this kind of event. The book's little note, "A list isn't limited to only <code>String</code> objects," points at more magic... if you look at the <a href="https://docs.oracle.com/javase/10/docs/api/javax/swing/JList.html">documentation</a>, you'll quickly see discussion like "A separate model maintains the contents of the list."</p>
+
+  <p>Don't worry about stuff from the API documentation that is confusing&mdash;this is the sort of stuff you learn how to use when you need to use it. But we'll talk a bit in class about what all this "model" talk is about, because this is a really important concept any time we have information we want to display, or allow the user to manipulate.</p>
+
+</body>
+</html>
