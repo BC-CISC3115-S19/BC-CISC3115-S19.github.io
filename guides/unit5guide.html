@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+      <!-- Always force latest IE rendering engine & Chrome Frame -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+      <meta http-equiv="cleartype" content="on"/>
+
+<title>Unit 5 Reading Guide</title>
+
+    <!-- Responsive and mobile friendly stuff -->
+    <!-- Stylesheets -->
+         <link rel="stylesheet" type="text/css" href="css/html5reset.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/col.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/8cols.css" media="all">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+</head>
+
+<body>
+  <div class="section group">
+    <div class="coursename span_8_of_8">
+      <a href="../index.html">CISC 3115</a>
+    </div>
+  </div>
+
+  <h2>Unit 5 Reading Guide</h2>
+
+  <h3>Learning Targets</h3>
+
+  <ol>
+    <li>I have a general understanding of Java's <code>Collections</code> framework.</li>
+    <li>I can write code that uses generic methods and classes defined in the Java API.</li>
+    <li>I can describe some differences in behavior among lists, sets, and maps.</li>
+    <li>I can choose which kind of Java collection to use based on the problem I am trying to solve.</li>
+  </ol>
+
+  <p>On to Chapter 16! We've already touched on a couple of the ideas
+    at the beginning of the chapter&mdash; like
+    what <code>ArrayList&lt;String&gt;</code> means, and how to sort
+    an <code>ArrayList</code>. But in the chapter we'll learn a lot
+    more about these parts of Java.</p>
+
+  <p>So the code on p. 531 should be no big deal. The only maybe-new
+    thing is the technique for splitting a <code>String</code> (using
+    the <code>split()</code> method, not surprisingly). Similarly,
+    we've already had the "discovery" that <code>ArrayList</code>
+    doesn't have a <code>sort()</code> method. The discussion on
+    p. 533&ndash;4 starts to give you an overview of what other kinds
+    of "collections" are available in the Java libraries; note that
+    most of the distinctions among these different collections are
+    based on what kinds of operations are fast, or not, for each
+    collection (e.g. in <code>HashSet</code> you can find an element
+    quickly).</p>
+
+  <p>(Note the remark about "my Data Structures class from
+    college"&mdash;obviously most people in <em>this</em> class haven't had <em>that</em> class yet! That's the
+  class where we talk a LOT about what a "tree" is, what a "linked
+  list" is, what "hash" means. So if you're not sure what those are,
+    don't worry! It's not super-important to understand now, but this is a valuable preview
+    of what you'll encounter when
+  you get to data structures.</p>
+
+<p>P. 536 is where things start to get interesting: rather than
+  working with <code>String</code>s in our collection, we're going to work
+  with instances of a new class we've
+  created, <code>Song</code>. There's a lot going on here: for the
+  first time, we're overriding the <code>toString()</code> method
+  that is defined up in the <code>Object</code> class (take a look
+  back at p. 208 in Chapter 8 if you need a refresher). And look at
+  the annotation&mdash;if you pass an <code>ArrayList</code>
+  to <code>System.out.println()</code>, it will call
+  the <code>toString()</code> method on each element in the list. (Put
+  another way, the Java API is set up to automatically produce a <code>String</code> representation
+  of any <code>ArrayList</code>, as long as the elements of the list have a <code>toString()</code> method.
+  The official  documentation for this
+  is <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/AbstractCollection.html#toString()">here</a>). Remember
+  this, about overriding <code>toString()</code>! </p>
+
+<p>So then on p. 538 we have another interesting problem: when we try
+  to sort our list of <code>Song</code>s, Java says it can't find a
+  sort method&mdash;even though this worked just fine a minute ago,
+  when we were sorting <code>String</code>s. If you want to see the
+  online version of the API documentation shown on p. 539,
+  it's <a href="https://docs.oracle.com/javase/10/docs/api/java/util/Collections.html#sort(java.util.List)">here</a>. And
+  the book very correctly notes that we have to "learn how to interpret
+  the documentation"&mdash;the notation in this method is a little
+  challenging.</p>
+
+<p>P. 540 and 541 give a good overview of what "generics" means. But before
+  you continue, make sure you understand why the situation illustrated on the
+  bottom of 540 is better than the situation above it&mdash;exactly what
+  kind of bad thing could happen "WITHOUT generics"? (Hint: we've seen
+  this diagram before, on p. 211.)</p>
+
+<p>So then a little weirdness in point (2) on p. 544. It's not clear
+  from this page why this is important (but this should look a lot
+  like the signature of the <code>sort()</code> method that we're
+  trying to understand. Hang in there... on p. 545, don't worry
+  (yet) about the differences between the two lines at the top, but you <em>should</em>
+  feel OK about the differences between  "taking <em>only</em> <code>Animal</code>" and "taking any type that
+  is a type of <code>Animal</code>.")</p>
+
+<p>Finally, p. 547 points out the problem with trying to sort a list
+  of <code>Song</code>s. Now, you can use the discussion from p. 544
+  on to help you unpack the code here. The main point is that if
+  you're going to sort a collection of some type, that type needs to
+  implement the <code>Comparable&lt;T&gt;</code> interface. (Note that
+  in theory you could have <code>Song</code> implement all kinds
+  of <code>Comparable</code> interfaces&mdash;not
+  just <code>Comparable&lt;Song&gt;</code> but
+  maybe <code>Comparable&lt;String&gt;</code>, <code>Comparable&lt;Animal&gt;</code>,
+  and so on. But does it make sense to compare a song to an animal? Or
+  even to a string? Almost always this doesn't make any sense, so
+  usually a class will only define the behavior for comparing two
+  objects of that class. But it's technically <em>possible</em> to compare two
+  objects of any two different classes, if you want.</p>
+
+<p>So on to the next problem, on p. 551. (By the way, when the book
+  talks about "The horrible way...", who does that remind you of?). Be
+  sure you understand the difference between <code>Comparable</code>
+  and <code>Comparator</code>. They both address the same problem, but
+  in different ways. And as this ongoing jukebox example shows, we
+  often need to use both.</p>
+
+  <p>Finally, note that the implementation on p. 553 makes
+  the <code>Comparator</code> an inner class (and also suggests we
+    could define several inner <code>Comparator</code>s. Why did they
+  use an inner class here? Would a non-inner class work? (By the way,
+  the paragraph
+    on <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html">this
+  page</a> entitled "Why Use Nested Classes?" nicely summarizes why
+    inner classes can be good (and when).</p>
+  <hr/>
+
+  <p>OK, let's finish the chapter. The next issue with the jukebox (now that we've figured out how to sort songs by different characteristics) is that when we ask for a list of songs that have been played, we're not interested (right now, anyway) in duplicates. So, p. 557 summarizes the three main types of collections Java has: lists, sets, and maps. (It might have been nice to know this back on p. 533, but now you know, and you can re-read the chapter....) By the way, it's nice that book gives us this nice general overview of (parts of) the <code>Collections</code> API, but it doesn't seem like any of the individual API docs have this information in it. How did the book authors figure this stuff out? Probably, they followed the link in one of those API documents to "<a href="https://docs.oracle.com/javase/10/docs/api/java/util/doc-files/coll-index.html">The Collections Framework</a>" and started reading the "Overview" they found there.</p>
+
+  <p>You should be sure you understand the basic differences among lists, sets, and maps. The diagram on p. 558 is useful for understanding how the most useful collection classes are related to each other. Don't worry <em>too</em> much right now about what exactly all these different classes are for, but DO notice the basic structure: each of the <code>Set</code>, <code>List</code>, and <code>Map</code> interfaces have a few classes that implement them. The names of those classes (mostly) include the name of the interface they implement plus (mostly) something else, like "Tree" or "Linked." The idea here is that the interface tells you what <em>behavior</em> the class offers, and the rest of the name tells you something about the class is <em>implemented</em>. If you're paying attention, you might be thinking, "Wait, doesn't that, like, reveal crucial implementation details, which is a grievous violation of ENCAPSULATION?" In another context, it might be&mdash;especially in a context where we might want to <em>change</em> how we implement something in the future. But in the context of collections, knowing about the implementation gives us valuable information about <em>performance</em>&mdash;what operations this class can do quickly, and what operations will be more time-consuming. So these names are useful and important.</p>
+
+  <p>So anyway: we need to store our songs in a set, because sets automatically prevent duplicates from being stored&mdash;either something is stored in the set, or it's not. We have several classes to choose from but (as it turns out), <code>HashSet</code> is the most straightforward. The code on p. 559 should be pretty easy to follow&mdash;note the <code>HashSet.addAll()</code> method. But, of course, just switching to a <code>HashSet</code> doesn't quite solve our duplicate problem (kinda like Java wouldn't "automatically" sort our <code>Song</code> objects). What's the problem this time? Remember, earlier, we had to provide customized <em>comparison</em> functionality; now we have a similar problem: we need to provide customized <em>equality</em> functionality. When we left out the comparison code for songs, remember, the compiler complained&mdash;in that case, we actually had to implement an interface. But in the case of equality, the <code>Object</code> class provides default behavior&mdash;so if we don't provide any custom code, then the default code will run. So, the code will compile and run, but, as we see on p. 559, it may not have the behavior we want.</p>
+
+  <p>What do we have to do? The relatively obvious part: we need to override the <code>equals()</code> method: this method defines what it means for two <code>Song</code> objects to be equal to each other (what is the book's definition of song-equality? it works for their examples, but do you think it's the most robust definition?) But there's a less-obvious thing we need to do, to: we need to override the <code>hashCode()</code> method. (You can read the documentation <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#hashCode()">here</a>; the book summarizes it pretty well.) You'll discuss hash codes more in data structures; the main idea we need now is that hash codes provide a <em>quick</em> way to check if two objects are the same or not. The default behavior is for <em>every</em> object to have a <em>unique</em> hashcode (this is not a 100% guarantee, but it's quite close). What does this have to do with <code>HashSet</code>? When we try to add an element to a <code>HashSet</code>, it compares the hashcode of that element to the hashcodes of the elements already in the set. If the hashcode doesn't match any existing elements, then that element is treated a a new/unique one. That's why the code on p. 559 doesn't work the way we want it to: every object gets a unique value, so they all "look different" to the <code>HashSet</code>. We need to override <code>hashCode()</code> so that if two objects are equal, then they also have the same hash code. Note how the book does this&mdash;the <code>equals()</code> and <code>hashCode()</code> implementations are quite similar.</p>
+
+  <p>The box on p. 563 is a good summary of how to work with hash codes; the Q&amp;A on that page gives a little more detail on what's going on with hashcodes inside <code>HashSet</code> (or other "Hash"-flavored collections), but the details aren't important for this course.</p>
+
+  <p>And now, a quick look at two more collections. <code>TreeSet</code> provides the same no-duplicate behavior, but it doesn't rely on hash codes. Instead, it keeps its elements sorted, so if you try to add an element that's already there, it's easy to discover that it's already there. Note that you MUST provide comparison behavior&mdash;either the objects you're adding implement <code>Comparable</code>, or else you have to pass a <code>Comparator</code> object to a <em>constructor</em> when you create the <code>TreeSet</code>. And a <code>Map</code> behaves kinda like a dictionary, except that you're not restricted to looking up words and definitions. The book's example is a nice one&mdash;we can create a map that allows us to quickly look up the score of a player.</p>
+
+  <p>The last few pages of the chapter go back and address some interesting issues around using generics: as usual, the issue is making sure that collections declared generically don't contain objects of an unexpected type. The book's treatment of this complex issue is pretty good, but you may need to read it a few times before you feel like you have a handle on the problem and the solution! As usual, the exercises at the end of the chapter are really good ways to check your understanding.</p>
+
+
+
+<hr/>
+</body>
+</html>
