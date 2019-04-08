@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+      <!-- Always force latest IE rendering engine & Chrome Frame -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+      <meta http-equiv="cleartype" content="on"/>
+
+<title>Exercise 4: Model-View-Controller (Introduction)</title>
+
+    <!-- Responsive and mobile friendly stuff -->
+    <!-- Stylesheets -->
+         <link rel="stylesheet" type="text/css" href="css/html5reset.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/col.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/8cols.css" media="all">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+</head>
+
+<body>
+  <div class="section group">
+    <div class="coursename span_8_of_8">
+      <a href="../index.html">CISC 3115</a>
+    </div>
+  </div>
+
+  <h2>Exercise 4: Model-View-Controller (Introduction)</h2>
+
+  <h3>Objectives:</h3>
+
+  <ul>
+    <li>Implement a Swing application</li>
+    <li>Understand the elements of the Model-View-Controller design
+      pattern</li>
+    <li>Be able to customize the behavior of some Swing components
+  </ul>
+
+  <h3>Overview</h3>
+
+  <p>In this exercise, we're going to focus on the Model-View-Controller <em>design pattern</em> we talked about briefly in class. There are two reasons for this: (1) MVC is a very commonly used design pattern, across many languages and application contexts; (2) MVC is (I think) a helpful way of thinking concretely about design, about how you can create effective <em>relationships</em> among objects in your applications.</p>
+
+  <p>This exercise has two parts. First, we'll look at another version of the "SwingLine" code that we looked at during the application activities, and we'll see how the code can be "refactored" to make it even more MVC-ish. Then, we'll look at how Swing itself uses MVC to design many of the Swing components. This will involve a fair amount of API-reading, and not so much code-writing... but that's actually how things go a lot of the time: you have to read a fair amount before you figure out how to write a couple lines of code.</p>
+
+
+  <h3>MVC Intro/Review</h3>
+  <p>I talked for a few minutes in class about
+  Model-View-Controller. That was no accident. While there are many
+  design patterns floating around Java, MVC shows up a lot in
+  Swing. And beginning to think in terms of design patterns is an
+  important step in your development as a software developer. (For
+    example, there are
+  a <a href="https://www.google.com/search?q=software+design+pattern+design+patterns+books&sa=X">ton</a>
+  of books written about design patterns, many focusing on a
+    particular programming language.)</p>
+
+  <p>As we saw in the big-small-circle application, MVC is often used
+  to structure the user interface of an application; it's a useful way
+  make sure we're keeping the three kinds of behavior (keeping track of data [the model], displaying the data [the view], and letting the user change the data [the controller]) fairly separate
+  from each other (and therefore making sure that we're not
+    programming like that jerk Larry).
+
+
+    <h3><code>SwingLine</code> MVC</h3>
+
+  <p><a href="SwingLineMVC.java">Here</a> is the source code for a "fully" Model-View-Controller version of the SwingLine application we also looked at last week. Take a look. The big difference between last week's version and this week's version is that I put the "application data" (in this case, the length and thickness of the line) into its own class, which I called <code>LineModel</code>. Most of the behavior in this class is essentially getter and setter behavior. But there is some additional code relating to the fact that this is part of an MVC design: when the data in the model changes, other objects (especially the View) may want to know about the change so they can update in response. So, I wrote <code>LineModel</code> to <code>extend Observable</code>. The <code>Observable</code> class offers the basic behavior of allowing other objects to "register" as "listeners" (similar to buttons and <code>ActionListeners</code>s). So a class that extends <code>Observable</code> gets all that behavior automatically. You'll also see that the main application class implements the <code>Observer</code> interface, which includes a single method, <code>update()</code>. My definition of the <code>update()</code> method tells the various elements of my View to update themselves with the new data from the Model. Read the documentation for <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Observable.html">Observable</a> and <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Observer.html">Observer</a>&mdash;you'll see that these have been <em>deprecated</em> because they're not as flexible and powerful and modern applications require, but they're still very good for exploring the foundational concepts.</p>
+
+  <p>In class, I'll ask you to modify the behavior of this application.</p>
+
+  <h3>Swing and MVC</h3>
+
+<p>Let's switch gears a bit and look at Swing components themselves. For example, what do we know about the <code>JTextField</code> class. Which of the following are responsibilities/behaviors of this class?
+<ol type="a">
+    <li> Store some text data
+    <li> Display some text data
+    <li> Respond to some keyboard entries
+  </ol></p>
+
+  <p>While you're thinking about that, look at the <code>JList</code>
+  discussion on p. 417 of the book. Which of these are
+    responsibilities of this class?
+
+    <ol type="a">
+      <li>Store a list of objects
+      <li>Remember which objects have been "selected"
+      <li>Display the values of the objects in the list
+      <li>Respond to mouse-clicks
+    </ol>
+
+    Actually, most of the Swing UI components have these
+    responsibilities: storing some data, presenting that data, and
+    allowing users to interact with that
+    data. (OK, a <code>JButton</code> doesn't have that much going
+    on&mdash;but that's one of the exceptions.) By the way, for those
+    two multiple choice questions, all of the listed items are
+    correct. In preparation for this week's exercise read
+ <a href="https://www.oreilly.com/library/view/java-swing/156592455X/ch01s04.html">this short excerpt</a> that discusses MVC generally as well as its application within Swing. Also, read the introductory text in the documentation for
+ <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.desktop/javax/swing/JList.html">JList</a>, paying particular attention to the discussions about <code>ListModel</code>, <code>ListSelectionModel</code>, and how cells are "painted" (i.e. the View).</p>
+
+  <p>In class, I'll walk you through how to customize some of the behavior of a <code>JList</code>.</p>
+
+<hr/>
+
+
+</body>
+</html>
