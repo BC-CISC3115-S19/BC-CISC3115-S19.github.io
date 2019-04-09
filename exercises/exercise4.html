@@ -45,18 +45,14 @@
 
   <h3>Overview</h3>
 
-  <p>In this exercise, you're not going to have to write much
-    code. The focus of the exercise is on getting into
-    the <em>relationship</em> among the objects/classes that make up
-    an application. Partly it's about more
-    reading-of-the-documentation, and partly it's about seeing how
-    object-oriented designs work in practice. There's a fair amount to
-    read and think about before you get to the point of writing
-    code&mdash;but that's usually how things go on a new project. Of
-    course, your endpoint for his exercise will be the starting point
-    for Project 2...</p>
+  <p>[Note: this is an extended version of the introductory materials I asked you to read before class. I've highlighted the tasks I'm asking you to <strong>in this face</strong>, but there's a little more reading to do around them, as well.]</p>
 
-  <h3>MVC</h3>
+  <p>In this exercise, we're going to focus on the Model-View-Controller <em>design pattern</em> we talked about briefly in class. There are two reasons for this: (1) MVC is a very commonly used design pattern, across many languages and application contexts; (2) MVC is (I think) a helpful way of thinking concretely about design, about how you can create effective <em>relationships</em> among objects in your applications.</p>
+
+  <p>This exercise has two parts. First, we'll look at another version of the "SwingLine" code that we looked at during the application activities, and we'll see how the code can be "refactored" to make it even more MVC-ish. Then, we'll look at how Swing itself uses MVC to design many of the Swing components. This will involve a fair amount of API-reading, and not so much code-writing... but that's actually how things go a lot of the time: you have to read a fair amount before you figure out how to write a couple lines of code.</p>
+
+
+  <h3>MVC Intro/Review</h3>
   <p>I talked for a few minutes in class about
   Model-View-Controller. That was no accident. While there are many
   design patterns floating around Java, MVC shows up a lot in
@@ -69,11 +65,25 @@
 
   <p>As we saw in the big-small-circle application, MVC is often used
   to structure the user interface of an application; it's a useful way
-  make sure we're keeping the three kinds of behavior fairly separate
+  make sure we're keeping the three kinds of behavior (keeping track of data [the model], displaying the data [the view], and letting the user change the data [the controller]) fairly separate
   from each other (and therefore making sure that we're not
-  programming like that jerk Larry). But think about what we know
-    about (for example) the <code>JTextField</code> class. Which of
-  the following are responsibilities/behaviors of this class?
+    programming like that jerk Larry).
+
+
+    <h3><code>SwingLine</code> MVC</h3>
+
+  <p><a href="SwingLineMVC.java">Here</a> is the source code for a "fully" Model-View-Controller version of the SwingLine application we also looked at last week. Take a look. The big difference between last week's version and this week's version is that I put the "application data" (in this case, the length and thickness of the line) into its own class, which I called <code>LineModel</code>. Most of the behavior in this class is essentially getter and setter behavior. But there is some additional code relating to the fact that this is part of an MVC design: when the data in the model changes, other objects (especially the View) may want to know about the change so they can update in response. So, I wrote <code>LineModel</code> to <code>extend Observable</code>. The <code>Observable</code> class offers the basic behavior of allowing other objects to "register" as "listeners" (similar to buttons and <code>ActionListeners</code>s). So a class that extends <code>Observable</code> gets all that behavior automatically. You'll also see that the main application class implements the <code>Observer</code> interface, which includes a single method, <code>update()</code>. My definition of the <code>update()</code> method tells the various elements of my View to update themselves with the new data from the Model. Read the documentation for <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Observable.html">Observable</a> and <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Observer.html">Observer</a>&mdash;you'll see that these have been <em>deprecated</em> because they're not as flexible and powerful and modern applications require, but they're still very good for exploring the foundational concepts.</p>
+
+  <p>Here are two small tasks for you to do with this code:
+    <ol>
+      <li>The comments note that things would be a little easier if <code>LineModel</code> offered methods to increment and decrement the thickness. <strong>Add those methods, and update the rest of the code to use those methods.</strong> Hint: these new methods should do very little work&mdash;they should re-use code you've already written, i.e. they should call existing methods whenever possible.</li>
+      <li><strong>Add a "Reset All" button that appears to the right of the <code>lengthDisplay TextField</code></strong>. This button should set the length to 100 and the thickness to 1. Pay attention to what code you need to write and what code you <em>don't</em> need to write. (And as above, re-use as much code as you can.) While you're at it, maybe you should declare 100 and 1 as constants in the <code>LineModel</code> class.</li>
+    </ol>
+  </p>
+
+  <h3>Swing and MVC</h3>
+
+<p>Let's switch gears a bit and look at Swing components themselves. For example, what do we know about the <code>JTextField</code> class. Which of the following are responsibilities/behaviors of this class?
 <ol type="a">
     <li> Store some text data
     <li> Display some text data
@@ -97,45 +107,32 @@
     data. (OK, a <code>JButton</code> doesn't have that much going
     on&mdash;but that's one of the exceptions.) By the way, for those
     two multiple choice questions, all of the listed items are
-    correct. (You can read more about Swing and
-    MVC <a href="https://www.oreilly.com/library/view/java-swing/156592455X/ch01s04.html">here</a>,
-    and more about the story for text components specifically
-    <a href="https://docs.oracle.com/javase/10/docs/api/javax/swing/text/JTextComponent.html">here</a>,
-    if you like.)</p>
+    correct. In preparation for this week's exercise read
+ <a href="https://www.oreilly.com/library/view/java-swing/156592455X/ch01s04.html">this short excerpt</a> that discusses MVC generally as well as its application within Swing. Also, read the introductory text in the documentation for
+ <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.desktop/javax/swing/JList.html">JList</a>, paying particular attention to the discussions about <code>ListModel</code>, <code>ListSelectionModel</code>, and how cells are "painted" (i.e. the View).</p>
 
-  <h3>Introducing the <code>Locale</code> class</h3>
+  <h3>Introducing the <code>Currency</code> class</h3>
 
   <p>In Project 2, we'll use these ideas to assemble
   a <em>slightly</em> complex Swing application. But for this
-    exercise, we'll focus on one non-Swing class (<code>Locale</code>)
+    exercise, we'll focus on one non-Swing class (<code>Currency</code>)
     and the <code>JList</code>
-  component. First, <a href="https://docs.oracle.com/javase/10/docs/api/java/util/Locale.html"><code>Locale</code></a>. As
-  the docs say, this is a class whose instances represent "a specific
-  geographical, political, or cultural region." This is obviously
-  something important to many applications&mdash;so much so that there
-  are several international standards that address how to represent
-  and identify locales; some of the behavior of this class is based on
-    those standards. So why do we care about locale? It might help us
-  if we want our application to be presented in the right language to
-  its user. But other things besides language depend on locale, like
-  how dates are formatted, how numbers are written, and specifically
-  how currencies are written. You can do all kinds of things with locales, but you might not be
-    surprised that some classes in the Java API are
-    "<code>Locale</code> sensitive." Among them
-    are <code>NumberFormat</code>, <code>Currency</code>,
-    and <code>DateFormat</code>. We'll deal more with those later...!</p>
+  component. First, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Currency.html"><code>Currency</code></a>. As
+    the docs say, this is a class whose instances represent currencies, using the ISO 4217 standard. This is an international standard; the <a href="https://en.wikipedia.org/wiki/ISO_4217">Wikipedia page for the standard</a> includes a table of active codes&mdash;basically, this is the standard that assigns three-letter codes, like <code>USD</code> for the United States dollar. If you ever exchange money, you see these codes in use. And software applications that deal with currency exchange also use these codes (as well as some related standards).</p>
+
 
   <h3>Customizing a <code>JList</code></h3>
-  <p>But for now, let's work on making a list of <code>Locale</code>s
+
+  <p>But for now, let's work on making a list of <code>Currency</code>s
   available to our users. Take a look
-    at <a href="LocaleList.java">this code</a>. It declares an array
-    of <code>Locale</code> objects, then creates
-  a <code>JList&lt;Locale&gt;</code> that holds those objects (note
+    at <a href="CurrencyList.java">this code</a>. It declares an array
+    of <code>Currency</code> objects, then creates
+  a <code>JList&lt;Currency&gt;</code> that holds those objects (note
     the <code>JList</code> constructor that lets me create the list
-    from an array of objects). Notice, too: this is not
+    from an array of objects). Maybe you want to check the wikipedia page about currency codes to find out what those codes represent. Notice, too: this is not
     a <code>JList</code> of <code>String</code>s, and I haven't given
     any instructions about how the <code>JList</code> is supposed to
-  display each of the locales in the list. What will happen? Make a
+  display each of the currencies in the list. What will happen? Make a
   hypothesis, then run the
   code and find out. Was your hypothesis correct? Why does the program
     have this behavior?</p>
@@ -144,13 +141,13 @@
   don't. How can we address this? Well, remember that one of the
   responsibilities of <code>JList</code> is to display its
   contents. If we
-  consult <a href="https://docs.oracle.com/javase/10/docs/api/javax/swing/JList.html">the
+  consult <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.desktop/javax/swing/JList.html">the
     documentation</a>, we learn (several paragraphs down) that
   "Painting of cells in a <code>JList</code> is handled by a delegate
   called a cell renderer." That is, every <code>JList</code> object
-  has an instance variable that refers to an object that implements
+  has an instance variable that refers to an object implementing
   the <a href="https://docs.oracle.com/javase/10/docs/api/javax/swing/ListCellRenderer.html"><code>ListCellRenderer</code> interface</a>. And, importantly, we
-  can change the cell renderer we use by passing a reference (to the
+  can tell the <code>JList</code> to use a different cell renderer by passing a reference (to the
   cell renderer we want) to the <code>setCellRenderer()</code> method
   of <code>JList</code>.</p>
 
@@ -177,11 +174,10 @@
   a <code>JList</code> is displayed with a bunch
   of <code>JLabel</code>s!</p>
 
-<p>But the real point is that we can change how cells are rendered
-  just by subclassing the default renderer. So, this is your first
+  <p>But the real point is that, just as we can change how a <code>JPanel</code> is painted by overriding the <code>paintComponent()</code> method, we can change how <code>JList</code>cells are rendered just by subclassing the default renderer. So, this is your first
   task (after all this reading): <strong>modify
-    the <code>LocaleList</code> code to display
-    each <code>Locale</code> in a more user-friendly way</strong>. <p>
+    the <code>CurrencyList</code> code to display
+    each <code>Currency</code> in a more user-friendly way</strong>. <p>
 
   <p>A few notes about this, though:
     <ul>
@@ -189,15 +185,15 @@
       don't like. You want to keep all the rest of the behavior of the
       default renderer (even though we don't know exactly what that
         behavior is). That is, you want your overridden
-       <code>getListCellRendererComponent()</code> method to the
+       <code>getListCellRendererComponent()</code> method to use the
         "default" behavior from the superclass <strong>first</strong>,
         then make your modifications.</li>
       <li>Look at the method parameters&mdash;some of them aren't
         relevant to this task, but maybe some of them are!</li>
       <li>Remember that the class you're writing
-      IS-A <code>JLabel</code>, so you have all those methods
-        available to you.</li>
-      <li>You might want to look at the <code>Locale</code>
+        IS-A <code>JLabel</code>, so you have all those <code>JLabel</code> methods
+        available to you through inheritance.</li>
+      <li>You might want to look at the <code>Currency</code>
       documentation to see if there's anything that can help you get a
         better-looking description.
         <li>Yes, this is a job for an inner class! Like the other
@@ -209,30 +205,16 @@
     <h3>Another <code>JList</code> customization</h3>
 
   <p>OK, let's do something crazy... let's let <em>the user</em> add
-    locales to this list. According to the <code>Locale</code> API,
-    the simplest way to create a <code>Locale</code> is with a
-    language code. So, let's add to the user interface&mdash; <strong>put in
-    a <code>JTextField</code> where a user can enter a language code,
+    currencies to this list. According to the <code>Currency</code> API,
+    we can create <code>Currency</code> objects using the <code>getInstance()</code> method, which takes a three-letter currency code as a parameter. So, let's add to the user interface&mdash; <strong>put in
+    a <code>JTextField</code> where a user can enter a currency code,
     and a button labeled "Add" that the user can click to add the
-      language to the list of locales</strong>. (While you're at it, you might
-    want to put some <code>JLabel</code>s in so the user can tell what
+      language to the list of currencies</strong>. (While you're at it, you might
+    want to put a few more <code>JLabel</code>s in so the user can tell what
     she's looking at.) To make this work, the main thing we need to do
     is implement the button listener. There's two issues here...</p>
 
-  <p>First, what if the user enters an invalid language code?
-  The <code>Locale</code> documentation says that the constructor
-  doesn't do any checking, so we should check ourselves. Fortunately,
-    the <code>Locale</code> class will give an array of all legal
-    language codes; we just have to
-  call <code>Locale.getISOLanguages</code>. Also, how do we tell the
-  user whether the code was legal or not? Let's be subtle: if it's
-  legal code, then when the button is clicked, a new locale is added
-    to the <code>JList</code> and the text field is cleared. If the
-    language code is not legal, then nothing happens to
-    the <code>JList</code> and nothing happens to
-    the <code>JTextField</code> either.</p>
-
-  <p>The other issue: how do we add something to a <code>JList</code>?
+<p>First: how do we add something to a <code>JList</code>?
   There are a lot of methods in the API, but none seem to involve
     changing the <em>contents</em> of the list. But wait!
   A <code>JList</code> is an MVC-style component (which element of MVC
@@ -250,9 +232,16 @@
     dynamic-content <code>JList</code> applications can use
   the <code>DefaultListModel</code> class to maintain list elements."
   That sounds promising... so <strong>pursue that idea in order to complete
-      your button <code>ActionListener</code></strong>.
+      your button's <code>ActionListener</code></strong>.
 
+<p>The second issue has to do with input validation:  what if the user enters an invalid currency code? The <code>getInstance()</code> method says it will "throw an <code>IllegalArgumentException</code>" if it doesn't get a supported currency code, but we haven't studied exceptions yet. We can also check ourselves: the <code>static</code> method <code>Currency.getAvailableCurrencies()</code> will return a collection (a <code>Set</code>, specifically) of supported currencies, and we can use <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html"><code>Set</code></a> methods to see if the user's input is valid. (And let's be subtle: if it's
+ a legal code, then when the button is clicked, a new currency is added
+    to the <code>JList</code> and the text field is cleared. If the
+    currency code is not legal, then nothing happens to
+    the <code>JList</code> and nothing happens to
+    the <code>JTextField</code> either.</p>
 
+<hr/>
 
 </body>
 </html>
