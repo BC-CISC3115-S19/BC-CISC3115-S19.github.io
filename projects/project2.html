@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+      <!-- Always force latest IE rendering engine & Chrome Frame -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+      <meta http-equiv="cleartype" content="on"/>
+
+<title>Project 2: Swing</title>
+
+    <!-- Responsive and mobile friendly stuff -->
+    <!-- Stylesheets -->
+         <link rel="stylesheet" type="text/css" href="css/html5reset.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/col.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/8cols.css" media="all">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+</head>
+
+<body>
+  <div class="section group">
+    <div class="coursename span_8_of_8">
+      <a href="../index.html">CISC 3115</a>
+    </div>
+  </div>
+
+  <h2>Project 2: Swing</h2>
+
+
+  <h3>Introduction</h3>
+
+<p>We've done some small Swing applications together (plus Exercise
+  4); in this project, you'll write a slightly more complex
+  application that includes some customized components. No-one is
+  going to mistake this for a "real" application, but by the time
+  you're done, you'll have a pretty solid understanding of many
+  aspects of Swing.</p>
+
+<p>Essentially, you're going to write an application that displays a
+  list of real estate sales and then lets the user "filter" those
+  sales to see the total value of sales by date range.</p>
+
+<p><strong>This is intended to be challenging but doable. DO NOT
+    HESITATE to ask me questions! And DO NOT WAIT to start on this!</strong></p>
+
+  <h3>Phase One</h3>
+
+  <p>So, first, write a relatively simple class
+  called <code>RealEstateSale</code>. It contains three instance
+    variables: <ul>
+      <li><code>String country</code>, which contains a
+  valid <a href="https://en.wikipedia.org/wiki/Two-letter_country_codes">two-letter country code</a> representing where the sale took place,</li>
+      <li><code>double price</code>, which represents
+  the amount of the sale (this is expressed in the currency of the
+        country, but we'll worry about currency later), and</li>
+      <li><code>Date
+  dateOfSale</code>, representing the day when the sale was
+        completed.</li>
+  </ul></p>
+
+  <p>Note that once an object like this is created, it shouldn't be
+  changed. So, you should write constructors and getters, but no
+  setters. Most of the work is in the constructors: you should make
+    sure all three elements are
+  valid. <a href="CurrencyConverter.java">Here</a> is a utility class I'm
+    providing for this project. <code>CurrencyConverter.countryCodes</code>
+  is a list of all the country codes the JRE knows about; you can use
+    this to test validity. To create a <code>Date</code> object, we
+    use a <code>Calendar</code> object (both in <code>java.util</code>):
+
+    <pre>
+Calendar dateMaker = Calendar.getInstance();
+dateMaker.set(2019, 3, 15);
+Date today = dateMaker.getTime();</pre>
+
+    Note that <code>today</code> represents <em>April</em>
+    15&mdash; months are counted from
+    0. Your <code>RealEstateSale</code> constructor(s) should
+    set <code>countryCode</code> to <code>null</code> if any of the
+    parameters it receives are invalid. (And you should probably
+    check those values for validity <em>before</em> passing them to
+    the constructor, when possible.)</p>
+
+
+  <h3>Phase Two</h3>
+
+ <p>Now incorporate this class into a Swing application. First, using
+   techniques from Exercise 4, create a <code>JList</code> that
+   displays the list of sales (of course, you'll have to create that list
+   of sales, too! Be sure your data includes at least 10 sales in a
+   variety of countries from a decent range of dates). Each sale should be displayed as a string
+   containing the relevant info; something like
+
+   <pre>US | November 4, 1984 | 20,000</pre>
+
+   You can use Java to help you format the date nicely:
+
+   <pre>
+ DateFormat localDateFormat = DateFormat.getDateInstance();
+ String dateString = df.format(today);</pre></p>
+
+
+  <h3>Phase Three</h3>
+
+<p>Once you have your sale-displaying list working, turn your
+  attention to displaying the total value of the sales. Probably you
+  can use a simple  <code>JLabel</code> to display this (remember we
+  can call <code>setText()</code> to change the text it
+  displays). First, get this working assuming that all the sale prices
+  are given in dollars. Once you have that logic working, use
+  the <code>CurrencyConverter.currConvert()</code> and <code>CurrencyConverter.getCurrency()</code>methods I provide to
+  convert the sale prices from the local currency to US dollars
+  (country code <code>US</code>). (Note there's a small problem here:
+  the method I provide uses the <em>current</em> exchange rate, but
+  for sales in the past, it would probably be better to use the
+  exchange rate from the date of the sale! But don't worry about that
+  for now.)</p>
+
+<p>Finally, add controls that will allow the user to specify the date
+  range of the sales whose values are summed for display (so e.g. you
+  could ask for the total sales between January 1 and December 31,
+  2015). The easiest way to do this is with a <code>JSpinner</code>,
+  which has support in the API for working with dates. In particular,
+  if you have <code>Date</code> values <code>firstDate</code>
+  and <code>lastDate</code>, then you can create
+  a <code>JSpinner</code> that lets the user select dates between
+  those ranges like this:
+
+  <pre>
+SpinnerDateModel model = new SpinnerDateModel(firstDate,              // date initially displayed
+                                              firstDate,              // low date in spinner's range
+                                              lastDate,               // high date in spinner's range
+                                              Calendar.DAY_OF_MONTH); // increment target
+JSpinner spinner = new JSpinner(model);</pre>
+
+  Note that the first parameter sets the value that is initially
+  displayed by the spinner; the last parameter specifies which part of
+  the date is incremented by the spinner's controls.</p>
+
+<p>Also note that these spinners should not change what is displayed
+  in the <code>JList</code>. They should only affect the displayed sum
+  of sale values.</p>
+
+<h3>Turning in and Grading</h3>
+
+  <p>Be sure the class containing <code>main()</code> is
+    called <code>ProjectTwo</code>. To turn in your project, send me
+    a zipfile containing all the Java source files you created, as
+    well as <code>CurrencyConverter.java</code>. The zipfile must be named LastnameFirstnameProject2.zip (that is, if I were submitting this, I would send <code>DexterScottProject2.zip</code>. Do not send a file that has been compressed with gzip, RAR, or any other archive/compression format. If you prefer, you may store your zipfile with a cloud service and send me a link.<p>
+
+<p>Your grade will be based on the following elements (see <a href="project1.html">Project 1</a> for notes about style
+	and documentation):
+
+<pre>
+  25%  Compiles and runs
+  25%  Runs correctly
+  10%  Layout is usable. (Clear and understandable, but not fancy)
+  20%  Good/readable style (follows guidelines)
+  20%  Appropriate comments</pre>
+
+
+  <p>Your email to me must be datestamped by <strong>6:00pm,
+  Wednesday, May 1</strong>. (Three weeks from the date of assignment, though including the holiday week.) Remember that I don't generally accept late assignments. But I'm happy to receive your work well in advance of the deadline.</p>
+
+<h3>Extra Credit Possibilities</h3>
+
+<p>There are lots of behaviors you can add for fun, if you have the
+  time and inclination. Adding some or all of these will add up to 10
+  points (out of 100) to your score for this project.
+
+  <ul>
+    <li>Add controls that allow the user to add additional "records"
+      to the list of sales. Probably this would be
+      three <code>JTextField</code>s and
+      a <code>JButton</code>. Probably your event-handler should check
+      to make the data is valid before actually creating a new entry
+      in the list.</li>
+    <li>Improve the <code>JList</code> display so that the sale prices
+    are displayed in the local
+      currency. <a href="https://examples.javacodegeeks.com/core-java/util/locale/java-util-locale-example/">Here</a>
+      is an example of using <code>Locale</code> with
+    the <code>NumberFormat</code> class to get properly formatted
+      local currency values.</li>
+    <li>Add a control that lets the user control
+    the <code>Locale</code> in which the total sale value is displayed
+      (rather than being only <code>USA</code>). Also, use this to
+    display the sales dates using the local date format.</li>
+    <li>Add another control that filters the totaled sales by country
+    (so that, for example, we could see the total value of sales in
+      Italy during July 2016).</li>
+<li>Allow the user to select&mdash;by clicking on them&mdash;the sales they want
+  included in the total sale sum (this will involve exploring the <code>JList</code> multi-select behavior).</li>
+    <li>Modify <code>CurrencyConverter.currConvert()</code> to return the
+    currency exchange rate of a specific date. This is a little
+    hairier than it sounds, mainly because Java SE does not include
+      JSON support.</li>
+  </ul>
+
+  <p>Other additions are certainly possible, but please check with me
+    about their "extra-creditworthiness" before you implement them.</p>
+
+
+
+
+
+
+ <hr/>
+</body>
+</html>
