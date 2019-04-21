@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+      <!-- Always force latest IE rendering engine & Chrome Frame -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+      <meta http-equiv="cleartype" content="on"/>
+
+<title>Unit 6 Reading Guide</title>
+
+    <!-- Responsive and mobile friendly stuff -->
+    <!-- Stylesheets -->
+         <link rel="stylesheet" type="text/css" href="css/html5reset.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/col.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/8cols.css" media="all">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+</head>
+
+<body>
+  <div class="section group">
+    <div class="coursename span_8_of_8">
+      <a href="../index.html">CISC 3115</a>
+    </div>
+  </div>
+
+  <h2>Unit 6 Reading: Recursion</h2>
+
+  <h3>Introduction: Recursion beyond Computer Science</h3>
+
+  <p><em>Recursion</em> may be a word you've never heard outside of computer science. But it's actually a concept with pretty deep roots in the study of language and the study of mathematics; more generally, recursion is a form of "self-reference." Some examples:
+
+  <ul>
+    <li>We can build up complicated sentences from simple ones:
+      <pre>
+        Hi.
+        Lance said, "Hi."
+        Saheed said, "Lance said, "Hi.""
+        Jen said, "Saheed said, "Lance said, "Hi."""
+        Juyin said, "Jen said, "Saheed said, "Lance said, "Hi.""""
+        .
+        .
+        .</pre>
+
+      These aren't super-interesting sentences, but they're perfectly legitimate.</li>
+
+    <li>You might be familiar with the <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci numbers</a>, which are defined as the sequence of numbers that starts with 0 and 1 and proceeds by calculating the sum of the last two numbers. So, after <em>0</em> and <em>1</em> comes 0+1=<em>1</em>, then 1+1=<em>2</em>, 1+2=<em>3</em>, 2+3=<em>5</em>, and so on.</li>
+
+    <li>The visual arts also use this idea: <a href="https://www.webdesignerdepot.com/2009/09/50-stunning-examples-of-the-droste-effect">here</a> is a collection of images using the idea of recursive self-reference&mdash;each image contains a smaller version of itself, which of course contains a smaller version of itself, and on and on...</li>
+  </ul></p>
+
+  <p>What do all these examples have in common? The idea that complex/big things can be built from simple/small things through the application of some rules. (The "rules" in the images aren't explicit, but if you look through the entire collection, you'll quickly see that there are really just a few fundamental techniques that the artists are using.) Or, looking at it from the other direction, recursion is a way to break down complex things into simple things.</p>
+
+  <h3>Some Computer Science "Humor"</h3>
+
+  <p>Self reference is very very common in computer science. There are lots of recursive <em>jokes</em> in computer science, even. Maybe you've heard of the web language PHP? <a href="https://php.net/manual/en/preface.php">PHP stands for "PHP: Hypertext Preprocessor."</a> Maybe you've heard of the free software operating system GNU/Linux? <a href="https://www.gnu.org/">GNU stands for "GNU's not Unix."</a> <a href="https://en.wikipedia.org/wiki/Recursive_acronym">This Wikipedia entry</a> includes a pretty long list of software tools with this kind of name-that-includes-itself; you'll probably recognize at least a few. Perhaps one of the best (or most annoying?) self-reference jokes in computer science appeared in an edition of the the book <em>The C Programming Language</em>. In the index, on page 269, is the index entry for recursion, which reads, "recursion 86, 139, 141, 182, 202, 269". It's pretty unusual for an index entry to list itself!</p>
+
+  <p>OK, probably none of this is laugh-out-loud humor. But it gives you a sense of what's going on when we talk about recursion in software. So, to get a little more specific about how recursion is <em>useful</em> in computer science: it is most commonly used in certain kinds of <em>calculations</em> (which will be our main focus in this class) and in making certain kinds of <em>definitions</em> (which is very important in data structures&mdash;and this is the main reason I want you to have some exposure to these ideas now).</p>
+
+  <h3>Some Recursive Calculations</h3>
+
+  <p>What would it take to write a method that calculated the <em>nth</em> Fibonacci number? Specifically, we want a method <code>int fibonacci(int n)</code> that will (say) return the 5th Fibonacci number if called as <code>fibonacci(5)</code>. What's the 5th Fibonacci number? I'm not sure, but I know it's the 3rd Fibonacci number plus the 4th Fibonacci number. I don't know what those are, but I know how to calculate them. Really, the only Fibonacci numbers I know for sure are the 0th number (which is 0) and the 1st number (which is 1). So there's two F-numbers (I'm tired of typing "Fibonacci") that are super-easy to calculate; the rest take some work. So let's try this code:
+    <pre>
+      int fibonacci(int n) {
+
+        // let's deal with the two easy cases first:
+        if (n == 0)
+          return 0;
+        else if (n == 1)
+          return 1;
+
+        // the rest of the F-numbers are calculated by summing the two previous F-numbers
+        else return fibonacci(n-1) + fibonacci(n-2);
+      }</pre>
+
+    Read this carefully and make sure the logic conforms to the definition of the Fibonacci numbers. There's obviously something a little unusual about this code: the <code>fibonacci</code> method calls itself! That may feel a little dangerous, or paradoxical, on the one hand; but on the other hand, this method is just applying the definition of "Fibonacci number."</p>
+
+  <p>Let's look at another numerical example, then we'll step back and look at what's going on. You may have heard of the mathematical idea of <a href="https://en.wikipedia.org/wiki/Factorial"><em>factorial</em></a>&mdash;for example, "6 factorial," written <code>6!</code> is the product <code>6 x 5 x 4 x 3 x 2 x 1</code>. Another way to look at it: 6 factorial is 6 times 5 factorial. Or, <code>6! = 6 x 5!</code>. So this formula shows us how to compute a big factorial (6!) based on the value of a smaller factorial (5!). Of course, that formula gets a little awkward if try to compute <code>1!</code> because <code>1! = 1 x 0!</code>. Fortunately for us, <code>0!</code> is defined to have the value 1.</p>
+
+  <p>We can use that formula to write a recursive factorial method:
+    <pre>
+      int factorial(int n) {
+        // the easy case--we know that 0! is 1
+        if (n == 0)
+          return 1;
+        else
+
+          // otherwise, we can use the formula to calculate our result
+          return n * factorial(n-1);
+      }</pre>
+
+    Hopefully, it's clear that these two methods "match" the formulas for the Fibonacci numbers and for factorial. But that doesn't mean they actually work properly. This is where it's important to have a solid understanding of how the "stack" works. Remember that "the stack" is not only the part of memory that stores local variables but also where the JVM keeps track of the history of methods that have been called (you might want to review these ideas on p. 237 of the textbook). How does the call stack work if you call <code>factorial(0)</code> from <code>main()</code>? What about <code>factorial(1)</code>? <code>factorial(3)</code>? Draw a diagram on a piece of paper. Once you have that done, compare your thinking with the diagram (a sort of blue triangular thing a little ways down the page) <a href="http://web.mit.edu/6.031/www/sp17/classes/10-recursion/">here</a>.</p>
+
+  <p>You can also try your hand at the <code>fibonacci()</code> call stack, though this is a little bit more complicated because the method calls itself <em>twice</em>. You should see that <code>fibonacci(0)</code> and <code>fibonacci(1)</code> are straightforward; carefully work out what happens when you call <code>fibonacci(2)</code>&mdash;then try <code>fibonacci(3)</code>. (You may realize that there are some serious inefficiencies here; there are ways to deal with this.)</p>
+
+  <p>What you hopefully realized is that even though these methods call themselves, which feels like something that maybe shouldn't be allowed, these actually work perfectly fine, because the "easy" cases cause the calling-itself process to stop. (By the way, note that if we call either of these methods with a <em>negative</em> parameter, we do have a problem&mdash;what happens with the call stack if we call <code>factorial(-1)</code>? How could we prevent this problem?) But, assuming we pass a "legal" parameter value, these methods calculate normally. So, an effective recursive method needs to have two sections: at least one "easy" case, which is technically called a <em>base case</em>, and at least one <em>recursive case</em> in which the method calls itself with a value that is smaller (in some sense) than the value it received. Of course, as the Fibonacci method shows, we can have multiple base cases, and sometimes we also need to have multiple recursive cases.</p>
+
+  <p><a href="RecursionPlayground.java">Here</a> is a class that contains several recursive methods; <a href="RecursionMain.java">here</a> is a main program that calls those methods. Work with this code to explore what happens when:
+    <ul type="a">
+      <li>There is no base case (try commenting out the initial <code>if/else</code>)</li>
+      <li>The recursive case doesn't call itself with a smaller parameter (so pass <code>n</code> instead of <code>n-1</code>).
+    </li></ul>
+  </p>
+
+  <h3>Recursive Calculations: It's Not Just Numbers</h3>
+
+  <p>But not every recursive calculation is based on numbers and arithmetic. Let's look at a couple more examples that might be familiar. A <em>palindrome</em> is a sequence that reads the same forwards as it does backwards. The word <code>level</code> is a palindrome; so is the sentence <code>A man, a plan, a canal, Panama.</code> (if you ignore case, spaces, and punctuation). How can we recognize a palindrome computationally? One way is to make a copy of the sequence, reverse it, and then go through character by character making sure everything matches. But we can also observe that a palindrome is built from a smaller palindrome&mdash;so a sequence <code>P</code> is a palindrome if <code>P</code> has the form <code>xQx</code>, where <code>x</code> is any character and <code>Q</code> is a palindrome.</p>
+
+  <p>That idea gives rise to a recursive approach for identifying a palindrome: given a string, check to see if the first and last characters are the same; if they are, then check to see if the middle section is a palindrome. Let's start writing some code based on this idea (and the Java <code>String</code> API).
+
+    <pre>
+      boolean isPalindrome(String s) {
+
+        // idea: compare first (index 0) and last (index length-1) characters
+        // if they're the same, test the "middle substring" to see if it's a palindrome
+
+        if (s.charAt(0) == s.charAt(s.length()-1))
+          return isPalindrome(s.substring(1,s.length()-1));
+        else
+          return false;
+      }</pre>
+
+    Double-check that this uses the <code>charAt()</code> and <code>substring()</code> methods properly. Assuming it does, there's still something missing: there's no base case! (It's maybe a little tricky to see, but the whole <code>if</code> statement is the recursive case.) What should the base case(s) say? Think about the strings <code>"pop"</code> and <code>"noon"</code>&mdash;what base case(s) do you need in order for these to be recognized as palindromes? Does your solution also work to reject <code>"cat"</code>? Does it work correctly for <code>"g"</code>?</p>
+
+  <p>Before we look at another <code>String</code> example, let's step back for a second. It may have occurred to you that so far, I haven't offered a compelling case that we <em>need</em> recursion. Most everything we've done far we could do just as easily&mdash;maybe easier&mdash; with a loop. It's easy to write a <code>for</code> loop to calculate factorial. I suggested that one way to identify a palindrome is basically to loop through a sequence and its reverse comparing characters. And it's true: recursion is a kind of repetition, just like loops, and in general, anything I do with recursion I can do with a loop, and vice-versa. (Heck, our textbook doesn't even <em>discuss</em> recursion!) Recursion and loops are both tools&mdash;neither of them is absolutely necessary, but each of them have areas in which they are the best tool for the job. I'm discussing these fairly simple calculations because they make it easier to see how recursion works, but no-one is going to argue that recursion is the best way to calculate a factorial in Java. On the other hand (brace yourself): some languages don't <em>have</em> loops. In that situation, recursion is the <em>only</em> way to achieve repetition. And, as you'll see when you take data structures, recursion is a really powerful way to define some data structures (and then to do some calculations on those data structures).</p>
+
+
+
+
+
+
+    <hr/>
+
+  <h3>Section 9.1 of <a href="http://math.hws.edu/eck/cs124/javanotes8/index.html">Introduction to Programming Using Java, 8th Ed.</a>.</h3>
+
+  <p>The introduction to the chapter makes a very important: <em>recursion</em> is an inherent part of how many things are organized and/or defined. Spend a little time thinking about defining "ancestor" and "Java statement." Can you come up with a brief and precise definition of "ancestor" without using recursion?</p>
+
+  <p>Mostly, when recursion is introduced in a programming course, the emphasis is on how to write recursive methods. Recursive programming solutions can feel a little odd when you first encounter them; but it might be helpful to think of these programming solutions as uncovering recursive definitions.</p>
+
+  <p><strong>9.1.1</strong>. If you haven't studied "binary search" before, take a quick detour to section 7.4.1, where there's s discussion of binary search. Of course, this requires a <em>sorted</em> list. THe code in 7.4.1. shows how to implement the search in an iterative way (relying a while loop); 9.1.1. shows you a a recursive approach. Is one approach better than the other? Not really... though some languages don't have looping structures, so recursion is the <em>only</em> approach available. I'd also suggest that the recursive implementation of binary search looks much more like the informal description of the algorithm ("check the middle... if it's not there, then search the half of the array where your target element might be").</p>
+
+  <p>Emphasizing a couple points from the text: "The key is to note two things that must be true for recursion to work properly: There must be one or more base cases, which can be handled without using recursion. And when recursion is applied during the solution of a problem, it must be applied to a problem that is in some sense smaller—that is, closer to the base cases—than the original problem. The idea is that if you can solve small problems and if you can reduce big problems to smaller problems, then you can solve problems of any size." and "Trying to think through this reduction in detail is likely to drive you crazy, and will probably make you think that recursion is hard. Whereas in fact, recursion is an elegant and powerful method that is often the simplest approach to solving a complex problem."</p>
+
+  <p>The discussion of the Towers of Hanoi is pretty good. In particular, the author doesn't start making big lists of all the moves that would have to be made (because this would "drive you crazy"!). Instead he focuses on finding a "smaller version of the problem." So the central part of the discussion is these few sentences:</p>
+
+    <blockquote>
+      <p>It seems natural to consider the size of the problem to be the number of disks to be moved. If there are N disks in Stack 0, we know that we will eventually have to move the bottom disk from Stack 0 to Stack 1. But before we can do that, according to the rules, the first N-1 disks must be on Stack 2. Once we've moved the N-th disk to Stack 1, we must move the other N-1 disks from Stack 2 to Stack 1 to complete the solution. But moving N-1 disks is the same type of problem as moving N disks, except that it's a smaller version of the problem.</p></blockquote>
+
+  <p>But... don't be fooled. The "art" of recursion is in discerning the relationship between the "original" problem and the "smaller version" of it. So when the author says "it seems natural... " he's a little bit concealing the work. But this is the kind of thing that comes with practice, so we'll do some application activities around this. So, for the Towers of Hanoi discussion, focus on: (1) understanding the recursive solution described in the text, and (2) verifying that the code matches the solution he describes.</p>
+
+  <p>The maze and pentominos applications are very cool... and complicated! Both of them use a very common problem-solving technique called <em>backtracking</em>. For our purposes, look at the <code>solveMaze()</code> method of the maze program (at the bottom of the page), and look at the recursive structure. (You don't even need to look at the rest of the code to understand what's going on&mdash;just understand that the maze is represented a 2-d grid of int values, where different values represent different contents (there's a "code" that means <em>wall</em>, another that means <em>empty cell</em>, and another that means "I've already been here" (it's part of my <em>path</em>). Try converting the code into an English description of how to solve a maze.)</p>
+
+  <p>Skip the quicksort discussion for now and jump to 9.1.4 ("blob counting"). As usual, the main thing here is identifying how to make the problem "smaller" in a recursive-friendly way. So study the text between the screenshot and the "buggy, incorrect" code carefully, and then study that buggy code carefully. (The reason the author shared the buggy code is that it captures the essential nature of the recursive solution&mdash;and also illustrates the importance of making sure you've <em>actually</em> made the problem smaller. Once you understand what the buggy code is trying to do, the correct version of the code should be easy to understand. (Also: how would you solve this without recursion? The author suggests that it would be quite difficult...)</p>
+
+  <p>Finally, let's go back to quicksort. First: this is a very clever algorithm; in particular, the idea of how to make the problem smaller is not an obvious one&mdash;though once you see how it works, it's not hard to describe. I don't expect you to memorize this algorithm or anything like that, but quicksort is another very good example of how recursion is sometimes the most powerful approach to solving a problem. The most important idea is the idea illustrated with the colored numbers at the beginning of 9.1.3: the <em>pivot</em>. You should be able to see that the brief discussion (with the orange-colored text) is essentially what is implemented in the <code>static void quicksort()</code> method. Don't spend a lot of time on the details of the <code>quickSortStep()</code> method&mdash;if you understand the idea of the "pivot" that's all you need. Also, don't worry about the long paragraph on "analysis of algorithms"&mdash;you'll come back to this in data structures and/or the algorithms course. </p>
+
+
+<hr/>
+</body>
+</html>
