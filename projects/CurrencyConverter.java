@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Currency;
 import java.util.Locale;
 import java.util.regex.*;
@@ -16,12 +17,7 @@ public class CurrencyConverter {
   /* intialize countryCodes */
 
   static {
-    String[] locales = Locale.getISOCountries();
-    countryCodes = new ArrayList<String>();
-    for (String s : locales) {
-      Locale l = new Locale("en", s);
-      countryCodes.add(l.getISO3Country());
-    }
+    countryCodes = new ArrayList<String>(Arrays.asList(Locale.getISOCountries()));
   }
 
   /**
