@@ -37,33 +37,42 @@
   <h3>Objectives:</h3>
 
   <ul>
-    <li>Implement viable <code>equals()</code> and <code>hashCode()</code>
+    <li>Implement multiple comparison criteria, as well as viable <code>equals()</code> and <code>hashCode()</code> methods.
     <li>Apply the <code>HashMap</code> collection.</li>
   </ul>
 
   <h3>Overview</h3>
 
-  <p>In this exercise, we're going to update the Jukebox application one more time. Instead of <em>ignoring</em> duplicates, now we want to <em>count</em> them.</p>
+  <p>In this exercise, we're going to update the Jukebox application one more time. Instead of <em>ignoring</em> duplicate songs, now we want to <em>count</em> them. This means we both need to be careful about <code>Song</code> equality&mdash;taking into account both artist and title&mdash;and we have to think carefully about which object(s) should do the counting, and how.</p>
 
   <h3>Tracking Unique Songs</h3>
-  <p>As we discussed at the end of class last week, song titles aren't enough to distinguish different songs&mdash;and if we want to count how many times a song is played, we certainly don't want to give credit to the wrong artists! So, fix the <code>Song</code> class so that two <code>Song</code> objects are only treated as equal if they have the same title <em>and</em> the same artist.</p>
+
+  <p>As we discussed at the end of class last week, song titles aren't enough to distinguish between different songs&mdash;and if we want to count how many times a song is played, we certainly don't want to give credit to the wrong artists! So, first, fix the <code>Song</code> class so that two <code>Song</code> objects are only treated as equal if they have the same title <em>and</em> the same artist. (If you change the <code>equals()</code> method of a class, what else needs to change?)</p>
 
 
-  <h3>Counting Songs</h3>
-  <p>Now, how exactly should we keep track of how many times each song is played? It's tempting to add a "countPlays" instance variable to the <code>Song</code> class, and maybe an "incrementCount()" method. But think about object-oriented design... should a song "know" how many times it's been played? That means it would also have to know (or be told) to reset that count periodically. I don't think that sounds like a great design&mdash;number-of-plays is not really an "essential quality" of a song. Alternatively, if you think about how the jukebox application works, each <code>Song</code> object really represents a single "play" of the song; if I have multiple objects representing multiple plays of the same song, which one should do the counting?</p>
+   <h3>Counting Songs</h3>
 
-  <p>Instead, I think it's more a property of the <em>player</em>. So, let's make it the responsibility of the jukebox to count the songs it plays&mdash;resetting the count will be much easier than (say) going through all the songs and resetting their individual counts. Specifically, create a hashmap instance variable in the <code>Jukebox3</code>class:
+  <p>Now, how exactly should we keep track of how many times each song is played? It's tempting to add a "countPlays" instance variable to the <code>Song</code> class, and maybe an "incrementCount()" method. But think about object-oriented design... should a song "know" how many times it's been played? That means it would also have to know (or be told) to reset that count periodically. Plus, what if a song were available on multiple jukeboxes? Why should we expect a song to be able to keep track of all the places it's played? Additionally, if you think about how the jukebox application works, each <code>Song</code> object really represents a single "play" of the song; if I have multiple objects representing multiple plays of the same song, which one should do the counting? So this idea, of having song objects count how many times they're played, doesn't sound like great design&mdash;number-of-plays is not really an "essential quality" of a song. </p>
+
+  <p>Instead, I think it's more a property of the device that <em>plays</em> songs. So, let's make it the responsibility of the jukebox to count the songs it plays&mdash;resetting the count will be much easier than (say) going through all the songs and resetting their individual counts.</p>
+
+  <p>That requires some kind of way to both keep track a list of all the songs that have been played so far <em>and</em> associate each of those songs with the number of times it's been played. Here's a bad idea: keep an array (or ArrayList) of <code>Song</code> objects, and then set up another array (or ArrayList) of <code>int</code> to hold the count of each cong, so that the elements in each array "match" each other. It's going to get time-consuming to search that array for a song&mdash;or, if we keep that array sorted, then we're going to have super-duper careful not to mess up the order of the count array. </p>
+
+  <p>Here's a better idea. The key in that last paragraph is <em>associate</em>: we want to associate each <code>Song</code> with its count. Often, the word "associate" is a hint that we want to use a <code>Map</code> structure. And that's exactly what we need to do. We can create a <code>Jukebox</code> instance variable, maybe named <code>songCount</code>, that will map a <code>Song</code> object to its count.  Specifically, we need to modify the book's <code>Jukebox3</code>class. We'll declare a <code>HashMap</code> instance variable:</p>
 
     <pre>
 HashMap&lt;Song, Integer&gt; songCount = new HashMap&lt;Song,Integer&gt;();</pre>
 
-    Write a method <code>countSongs()</code> that iterates through <code>songList</code> and uses <code>songCount</code> to map every song that’s been played to the count of how many times it’s been played. And add code to the <code>main()</code> method that uses <code>songCount</code> to display the number of times each song has been played.</p>
+    Now, write a method <code>countSongs()</code> that iterates through <code>songList</code> and uses <code>songCount</code> to map every song that’s been played to the count of how many times it’s been played. And add code to the <code>main()</code> method that uses <code>songCount</code> to display the number of times each song has been played.</p>
 
   <p>Here is the book's original code: <a href="Jukebox3.java">Jukebox3.java</a>&nbsp;&nbsp;<a href="Song.java">Song.java</a></p>
 
   <p>Of course, you'll have to generate your own input text file in order to test your code. Remember that this version of the <code>Song</code> class reads in 4 "tokens" per line, so be sure your input file format matches what the code expects.</p>
 
   <p>If you have time, write code that allows us to compare songs by <em>both</em> title and artist (that is, so that songs with the same title can still be put in order by the artist name.)</p>
+
+
+  <hr/>
 
 
 </body>
